@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Homepage-Vorschläge für Laura</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<style>
+  :root { --bg: #0e1220; --card: #171c2e; --line: #262d45; --ink: #f2f3f7; --soft: #a3a9bd; --mag: #ff4fae; --mag-d: #c2007a; --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 var(--sans); }
+  a { color: inherit; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); }
+  header { padding: clamp(40px, 7vw, 80px) 0 clamp(24px, 4vw, 40px); }
+  .eyebrow { color: var(--mag); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; font-size: .78rem; margin: 0 0 12px; }
+  h1 { font-size: clamp(2.2rem, 5.5vw, 3.8rem); line-height: 1.05; margin: 0 0 .4em; letter-spacing: -.02em; }
+  .lead { color: var(--soft); font-size: 1.12rem; max-width: 46em; margin: 0; }
+  .how { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+  .how span { border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-size: .88rem; color: var(--soft); }
+  .how b { color: var(--ink); }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding-bottom: 50px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; text-decoration: none; transition: transform .2s, border-color .2s; }
+  .card:hover, .card:focus-visible { transform: translateY(-4px); border-color: var(--mag-d); outline: none; }
+  .thumb { position: relative; aspect-ratio: 16/10; overflow: hidden; background: #0a0d18; }
+  .thumb iframe { position: absolute; top: 0; left: 0; width: 1280px; height: 800px; border: 0; transform-origin: 0 0; pointer-events: none; }
+  .meta { padding: 16px 18px 20px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .num { font-size: .78rem; font-weight: 700; color: var(--mag); letter-spacing: .1em; }
+  .meta h2 { margin: 0; font-size: 1.25rem; }
+  .meta p { margin: 0; color: var(--soft); font-size: .93rem; }
+  .meta .tags { margin-top: auto; padding-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .meta .tags span { font-size: .74rem; background: #222943; color: #c9cee0; padding: 3px 9px; border-radius: 999px; }
+  .card.new .num::after { content: "NEU AUS DEM FLYER"; margin-left: 8px; background: var(--mag-d); color: #fff; padding: 2px 7px; border-radius: 4px; font-size: .66rem; }
+
+  .notes { border-top: 1px solid var(--line); padding: 40px 0 60px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; color: var(--soft); font-size: .93rem; }
+  .notes h3 { color: var(--ink); font-size: 1rem; margin: 0 0 .4em; }
+  .notes ul { margin: 0; padding-left: 1.1em; }
+  footer { color: #6e7590; font-size: .8rem; padding: 0 0 30px; }
+  @media (max-width: 980px) { .grid, .notes { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 620px) { .grid, .notes { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Entwürfe · Stand November 2026</p>
+    <h1>Zwölf Ideen für lauramatthes.de</h1>
+    <p class="lead">Liebe Laura, hier sind zwölf ganz unterschiedliche Ansätze für deine Homepage – vom klassischen Auftritt über eine Zeitung und einen Brief bis zum Chat, zur Karte und zum digitalen Flyer. Alle nutzen die Texte, Fotos und Farben aus dem Flyer. Klick dich durch und sag uns, was dir gefällt – gern auch Mischungen.</p>
+    <div class="how"><span><b>Karte anklicken</b> öffnet den Entwurf</span><span>Unten im Entwurf: <b>← →</b> zum Weiterblättern</span><span><b>Pfeiltasten</b> funktionieren auch</span></div>
+  </header>
+
+  <main class="grid" id="grid"></main>
+
+  <section class="notes">
+    <div>
+      <h3>Was überall gleich ist</h3>
+      <ul>
+        <li>Slogan „Klar. Verlässlich. Besser für Mering.“ (neuer Stand – im Flyer-Entwurf steht noch „Gut für Mering“)</li>
+        <li>Wahltermin 17.01.2027, Navy und Magenta, nicht grün</li>
+        <li>Brief, Erwartungen und vier Themen aus dem Flyer-Text</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Noch Entwurf</h3>
+      <ul>
+        <li>Schriften sind Systemschriften – die finale Flyer-Schrift binden wir datenschutzkonform ein</li>
+        <li>Fotos aus dem Flyer-PDF, also nicht in voller Auflösung</li>
+        <li>Formulare senden erst nach dem Livegang</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Feedback</h3>
+      <ul>
+        <li>Welche 2–3 Entwürfe gefallen dir am besten?</li>
+        <li>Was fehlt dir, was ist zu viel?</li>
+        <li>Einzelne Bausteine lassen sich kombinieren (z. B. Klassisch + Klartext-Tabelle)</li>
+      </ul>
+    </div>
+  </section>
+  <footer>Interne Entwurfsseite – nicht öffentlich verlinken. Fotos: Klaus Trinnes, Ralf Hermle.</footer>
+</div>
+
+<script>
+  const V = [
+    ['01-klassisch', 'Klassisch', 'Seriöser One-Pager: großes Foto, Brief, „Mein Wort“ als Gegenüberstellung und die vier Themen mit Bildern.', ['seriös', 'übersichtlich'], false],
+    ['02-zeitung', 'Meringer Zeitung', 'Die Seite als Lokalzeitung: Aufmacher-Interview, Ressorts, Kommentar und Leserpost.', ['ungewöhnlich', 'textstark'], false],
+    ['03-brief', 'Brief an Mering', 'Ein persönlicher Brief auf Papier – der Flyer-Text als Herzstück, Themen als Notizzettel.', ['persönlich', 'ruhig'], false],
+    ['04-karte', 'Mering-Karte', 'Themen auf einer Karte von Mering: Rathaus, Gewerbe, Kita, Ortsmitte … zum Antippen.', ['interaktiv', 'lokal'], false],
+    ['05-gespraech', 'Im Gespräch', 'Ein Chat mit Laura: Besucher tippen Fragen an, Laura antwortet mit Text und Bild.', ['interaktiv', 'nahbar'], false],
+    ['06-steckbrief', 'Steckbrief', 'Das freigestellte Foto mit Pfeilen wie im Flyer, darunter Brief und Themenstreifen.', ['Flyer-Look', 'sympathisch'], true],
+    ['07-plakat', 'Plakat', 'Vollbild-Panels mit riesiger Schrift: KLAR. VERLÄSSLICH. BESSER. – wie ein Großflächenplakat.', ['laut', 'mutig'], false],
+    ['08-magazin', 'Magazin', 'Porträt-Reportage mit Interview, „Eine Woche im Amt“ und großen Fotos – in Blaugrün.', ['emotional', 'Blaugrün'], false],
+    ['09-mitmachen', 'Mitmachen', 'Beteiligung zuerst: Prioritäten wählen, „Wenn ich Bürgermeisterin wäre …“-Wand, Unterstützen & Spenden.', ['Beteiligung', 'Blaugrün'], false],
+    ['10-visitenkarte', 'Visitenkarte', 'Eine einzige Karte fürs Handy – ideal für den QR-Code auf Plakat und Flyer.', ['kompakt', 'mobil'], false],
+    ['11-klartext', 'Klartext', 'Die Erwartungs-Tabelle als Hauptattraktion: „Was Sie erwarten dürfen – und was nicht“.', ['ehrlich', 'Flyer-Inhalt'], true],
+    ['12-flyer', 'Digitaler Flyer', 'Der quadratische Flyer zum Durchblättern – alle sechs Seiten, digital umgesetzt.', ['Flyer 1:1', 'blättern'], true],
+  ];
+  const grid = document.getElementById('grid');
+  grid.innerHTML = V.map(([id, name, desc, tags, isNew], i) => `
+    <a class="card${isNew ? ' new' : ''}" href="varianten/${id}/index.html">
+      <div class="thumb"><iframe src="varianten/${id}/index.html" loading="lazy" tabindex="-1" aria-hidden="true" title=""></iframe></div>
+      <div class="meta"><span class="num">${String(i + 1).padStart(2, '0')}</span><h2>${name}</h2><p>${desc}</p>
+      <div class="tags">${tags.map(t => `<span>${t}</span>`).join('')}</div></div>
+    </a>`).join('');
+  const fit = () => document.querySelectorAll('.thumb').forEach(t => { t.querySelector('iframe').style.transform = `scale(${t.clientWidth / 1280})`; });
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

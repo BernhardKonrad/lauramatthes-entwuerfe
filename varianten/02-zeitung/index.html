@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Laura Matthes – Die Mering-Ausgabe</title>
+<meta name="description" content="Laura Matthes, Zweite Bürgermeisterin von Mering. Am 17.01.2027 zur Bürgermeisterin wählen.">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<style>
+  :root {
+    --paper: #f6f4ef; --ink: #141414; --soft: #4b4b4b; --rule: #1a1a1a; --hair: #cfcac0; --red: #c2007a; --navy: #0b1f44;
+    --serif: Georgia, "Times New Roman", Times, serif;
+    --cond: "Bahnschrift SemiCondensed", "Arial Narrow", "Roboto Condensed", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 17px/1.6 var(--serif); }
+  .page { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
+  a { color: inherit; }
+  img { display: block; width: 100%; object-fit: cover; filter: grayscale(.15) contrast(1.05); }
+
+  .topline { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font: 600 12px/1 var(--cond); letter-spacing: .08em; text-transform: uppercase; padding: 14px 0; border-bottom: 1px solid var(--rule); }
+  .topline b { color: var(--red); }
+  .masthead { text-align: center; padding: 22px 0 10px; border-bottom: 4px double var(--rule); }
+  .masthead h1 { font: 700 clamp(2.6rem, 9vw, 6.4rem)/0.95 var(--serif); letter-spacing: -.02em; margin: 0; }
+  .masthead p { margin: 10px 0 0; font: italic 1rem var(--serif); color: var(--soft); }
+  .ressorts { display: flex; justify-content: center; gap: 22px; flex-wrap: wrap; padding: 10px 0; border-bottom: 1px solid var(--rule); font: 600 13px var(--cond); letter-spacing: .1em; text-transform: uppercase; }
+  .ressorts a { text-decoration: none; }
+  .ressorts a:hover { color: var(--red); }
+
+  .kicker { font: 700 12px var(--cond); letter-spacing: .14em; text-transform: uppercase; color: var(--red); margin: 0 0 6px; }
+  h2, h3 { font-family: var(--serif); margin: 0 0 .4em; line-height: 1.1; }
+
+  .lead { display: grid; grid-template-columns: 2fr 1fr; border-bottom: 1px solid var(--rule); }
+  .lead-main { padding: 28px 28px 28px 0; border-right: 1px solid var(--rule); }
+  .lead-main h2 { font-size: clamp(2rem, 5vw, 3.4rem); letter-spacing: -.015em; }
+  .deck { font-size: 1.2rem; color: var(--soft); margin: 0 0 18px; }
+  .lead-img { aspect-ratio: 16/9; object-position: center 30%; margin-bottom: 8px; }
+  .caption { font: italic 13px var(--serif); color: var(--soft); margin: 0 0 18px; }
+  .cols { column-count: 2; column-gap: 28px; column-rule: 1px solid var(--hair); }
+  .cols p { margin: 0 0 .8em; text-align: justify; hyphens: auto; }
+  .cols p:first-child::first-letter { float: left; font-size: 3.6em; line-height: .8; padding: 6px 8px 0 0; font-weight: 700; }
+
+  .lead-side { padding: 28px 0 28px 28px; display: flex; flex-direction: column; gap: 24px; }
+  .portrait { aspect-ratio: 4/5; object-position: center 20%; }
+  .box { border: 1px solid var(--rule); padding: 16px 18px; }
+  .box h3 { font: 700 13px var(--cond); letter-spacing: .12em; text-transform: uppercase; border-bottom: 1px solid var(--rule); padding-bottom: 8px; }
+  .box dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; font-size: .95rem; }
+  .box dt { font-weight: 700; }
+  .box dd { margin: 0; }
+
+  .section-title { display: flex; align-items: center; gap: 14px; margin: 34px 0 18px; font: 700 14px var(--cond); letter-spacing: .16em; text-transform: uppercase; }
+  .section-title::before, .section-title::after { content: ""; flex: 1; border-top: 1px solid var(--rule); }
+
+  .stories { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--rule); }
+  .story { padding: 20px 20px 24px; border-right: 1px solid var(--hair); }
+  .story:last-child { border-right: 0; }
+  .story img { aspect-ratio: 4/3; margin-bottom: 14px; }
+  .story h3 { font-size: 1.35rem; }
+  .story p { margin: 0 0 .8em; font-size: .95rem; color: var(--soft); }
+  .story .pull { font-style: italic; color: var(--ink); border-top: 1px solid var(--hair); padding-top: .6em; }
+
+  .opinion { display: grid; grid-template-columns: 1fr 1fr; border-top: 4px double var(--rule); margin-top: 34px; }
+  .opinion > div { padding: 24px 24px 24px 0; }
+  .opinion > div + div { padding: 24px 0 24px 24px; border-left: 1px solid var(--hair); }
+  .opinion h3 { font-size: 1.5rem; }
+  .opinion ol { margin: 0; padding-left: 1.3em; }
+  .opinion li { margin-bottom: .45em; }
+  .opinion .no li::marker { color: var(--red); }
+
+  .bottom { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--rule); }
+  .bottom > div { padding: 24px 24px 24px 0; }
+  .bottom > div + div { padding: 24px 0 24px 24px; border-left: 1px solid var(--hair); }
+  .notice { border: 3px solid var(--navy); padding: 18px; text-align: center; }
+  .notice strong { display: block; font: 700 clamp(1.6rem, 4vw, 2.4rem)/1.1 var(--serif); color: var(--navy); margin: 6px 0; }
+
+  .coupon { border: 2px dashed var(--rule); padding: 18px; }
+  .coupon label { display: block; font: 600 12px var(--cond); letter-spacing: .1em; text-transform: uppercase; margin: 10px 0 4px; }
+  .coupon input, .coupon textarea { width: 100%; font: 16px var(--serif); padding: 8px 2px; border: 0; border-bottom: 1px solid var(--rule); background: transparent; }
+  .coupon textarea { resize: vertical; }
+  .coupon button { margin-top: 14px; font: 700 13px var(--cond); letter-spacing: .14em; text-transform: uppercase; background: var(--ink); color: var(--paper); border: 0; padding: 12px 18px; cursor: pointer; }
+  .coupon button:hover { background: var(--red); }
+
+  footer { border-top: 1px solid var(--rule); margin-top: 10px; padding: 18px 0 30px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font: 13px var(--cond); letter-spacing: .04em; color: var(--soft); }
+
+  @media (max-width: 900px) {
+    .lead { grid-template-columns: 1fr; }
+    .lead-main { padding-right: 0; border-right: 0; border-bottom: 1px solid var(--rule); }
+    .lead-side { padding-left: 0; display: grid; grid-template-columns: 1fr 1fr; }
+    .stories { grid-template-columns: 1fr 1fr; }
+    .story:nth-child(2n) { border-right: 0; }
+    .story:nth-child(-n+2) { border-bottom: 1px solid var(--hair); }
+  }
+  @media (max-width: 640px) {
+    .cols { column-count: 1; }
+    .lead-side, .stories, .opinion, .bottom { grid-template-columns: 1fr; }
+    .story { border-right: 0 !important; border-bottom: 1px solid var(--hair); }
+    .opinion > div, .bottom > div { padding: 20px 0 !important; border-left: 0 !important; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topline">
+    <span>Mering · Herbst 2026</span>
+    <span><b>✕</b> Bürgermeisterwahl am 17. Januar 2027</span>
+    <span>Herausgegeben von Laura Matthes</span>
+  </div>
+
+  <header class="masthead">
+    <h1>Die Mering-Ausgabe</h1>
+    <p>Klar. Verlässlich. Besser für Mering.</p>
+  </header>
+
+  <nav class="ressorts" aria-label="Rubriken">
+    <a href="#titel">Titel</a><a href="#ressorts">Ressorts</a><a href="#meinung">Meinung</a><a href="#coupon">Leserpost</a>
+  </nav>
+
+  <section class="lead" id="titel">
+    <article class="lead-main">
+      <p class="kicker">Bürgermeisterwahl</p>
+      <h2>„Jetzt ist die Zeit für einen neuen Stil.“</h2>
+      <p class="deck">Laura Matthes kennt das Rathaus aus der täglichen Arbeit. Am 17. Januar will die Zweite Bürgermeisterin es führen – mutig, sachlich, lösungsorientiert.</p>
+      <img class="lead-img" src="../../assets/fotos/laura-garten-quer.jpg" alt="Laura Matthes mit verschränkten Armen vor Bäumen" width="1600" height="1195">
+      <p class="caption">Klarheit in den Entscheidungen, Verlässlichkeit im Handeln: Laura Matthes will Mering gut für die Zukunft aufstellen.</p>
+      <div class="cols">
+        <p>Mering ist für Laura Matthes und ihre Familie zur Heimat geworden. Die gebürtige Aachenerin lebt mit ihrem Mann und drei Kindern im Ort – in einer Gemeinde mit kurzen Wegen, lebendigen Vereinen, aktiven Kirchengemeinden und einem starken Miteinander. „Genau das möchte ich bewahren“, sagt sie. „Aber in einer sich wandelnden Welt können wir nicht stehen bleiben.“</p>
+        <p>Seit der Kommunalwahl sitzt Matthes im Marktgemeinderat, seit Mai ist sie Zweite Bürgermeisterin. Mering brauche mehr als Repräsentation, findet sie. Als Textilökonomin mit Master aus Schweden und als Bedarfsplanerin bringt sie Erfahrung aus Wirtschaft und Handel mit: „Ich weiß, wie man vorausschauend plant und Ressourcen sinnvoll einsetzt.“</p>
+        <p>Wofür sie steht? „Klarheit in den Entscheidungen, Verlässlichkeit im Handeln und Transparenz in der Kommunikation. Ehrlich, auch wenn es einmal unbequem ist.“</p>
+      </div>
+    </article>
+    <aside class="lead-side">
+      <img class="portrait" src="../../assets/fotos/laura-garten-gehend.jpg" alt="Laura Matthes geht durch einen Garten" width="1000" height="1500">
+      <div class="box">
+        <h3>Steckbrief</h3>
+        <dl>
+          <dt>Geboren</dt><dd>1984 in Aachen</dd>
+          <dt>Familie</dt><dd>verheiratet, drei Kinder (6, 10, 12)</dd>
+          <dt>Studium</dt><dd>Master of Science, Schweden</dd>
+          <dt>Beruf</dt><dd>Textilökonomin, Bedarfsplanerin</dd>
+          <dt>Im Amt</dt><dd>2. Bürgermeisterin, Marktgemeinderätin</dd>
+          <dt>Außerdem</dt><dd>Sportabzeichen in Gold</dd>
+        </dl>
+      </div>
+    </aside>
+  </section>
+
+  <h2 class="section-title" id="ressorts">Aus den Ressorts</h2>
+  <section class="stories">
+    <article class="story">
+      <img src="../../assets/fotos/thema-verwaltung.jpg" alt="Laura Matthes am Schreibtisch im Rathaus" loading="lazy">
+      <p class="kicker">Verwaltung</p><h3>Ein Rathaus, das für Sie arbeitet</h3>
+      <p>Verlässliche Personalplanung, klare Zuständigkeiten, Weiterbildung und Technik, die hilft. Digital, wo es Zeit spart – persönlich, wo es nötig ist.</p>
+      <p class="pull">„Wer gut arbeiten kann, kann auch gut helfen.“</p>
+    </article>
+    <article class="story">
+      <img src="../../assets/fotos/thema-wirtschaft.jpg" alt="Laura Matthes im Gespräch" loading="lazy">
+      <p class="kicker">Wirtschaft</p><h3>Ausrichtung statt Einzelfall</h3>
+      <p>Mering soll festlegen, welche Branchen es gezielt ansiedeln will. Eine feste Anlaufstelle begleitet Genehmigungen und behält Fristen im Blick.</p>
+      <p class="pull">„Verlässliche Ansprechpartner sind der beste Standortfaktor.“</p>
+    </article>
+    <article class="story">
+      <img src="../../assets/fotos/thema-familie.jpg" alt="Laura Matthes mit Kindern auf einer Wiese" loading="lazy" style="object-position:center 30%">
+      <p class="kicker">Familie</p><h3>Kein Zittern um den Kitaplatz</h3>
+      <p>Planung nach echten Geburten- und Zuzugszahlen, Strukturen, die mitwachsen – und flexible Lösungen statt teurer Großprojekte.</p>
+      <p class="pull">„Planungssicherheit für Familien. Verlässlichkeit für den Haushalt.“</p>
+    </article>
+    <article class="story">
+      <img src="../../assets/fotos/laura-herbst-portrait.jpg" alt="Laura Matthes im Herbst" loading="lazy">
+      <p class="kicker">Zukunft</p><h3>Mering für morgen</h3>
+      <p>Sichere Fuß- und Radwege, maßvolle Nachverdichtung, bezahlbares Wohnen, Naturschutz bei jeder Entscheidung – und Rathaus-Dächer mit Photovoltaik.</p>
+      <p class="pull">„Damit unser Zuhause so lebenswert bleibt, wie es ist.“</p>
+    </article>
+  </section>
+
+  <section class="opinion" id="meinung">
+    <div>
+      <p class="kicker">Kommentar der Kandidatin</p>
+      <h3>Was Sie von mir erwarten dürfen</h3>
+      <ol>
+        <li>Überparteiliche, lösungsorientierte Arbeit</li>
+        <li>Recht und Gesetz – und offen eingestandene Fehler</li>
+        <li>Ein offenes Ohr für Ihre Anliegen</li>
+        <li>Verantwortungsvollen Umgang mit öffentlichem Geld</li>
+        <li>Respekt gegenüber den Mitarbeitenden der Gemeinde</li>
+        <li>Gewissenhafte Arbeit für Mering</li>
+        <li>Transparenz, auch wenn es unbequem ist</li>
+      </ol>
+    </div>
+    <div class="no">
+      <p class="kicker">Und ehrlich gesagt</p>
+      <h3>Was Sie nicht erwarten dürfen</h3>
+      <ol>
+        <li>Dass ich keinen eigenen Standpunkt habe</li>
+        <li>Dass ich keine Fehler mache</li>
+        <li>Dass jeder Bürgerwunsch erfüllt werden kann</li>
+        <li>Dass Merings Finanzen morgen saniert sind</li>
+        <li>Dass jeder gleich glücklich mit mir ist</li>
+        <li>Dass ich jede Vereinsfeier besuchen kann</li>
+        <li>Dass ich immer sofort eine Lösung parat habe</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="bottom">
+    <div>
+      <div class="notice">
+        <p class="kicker">Termin zum Vormerken</p>
+        <strong>Sonntag, 17. Januar 2027</strong>
+        Bürgermeisterwahl in Mering. Briefwahl ist möglich.
+      </div>
+    </div>
+    <div id="coupon">
+      <p class="kicker">Leserpost an die Kandidatin</p>
+      <form class="coupon" name="anliegen" method="POST" data-netlify="true" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Danke – kommt an!';">
+        <input type="hidden" name="form-name" value="anliegen">
+        <label for="z-name">Name</label><input id="z-name" name="name" required>
+        <label for="z-mail">E-Mail</label><input id="z-mail" type="email" name="email" required>
+        <label for="z-msg">Ihr Anliegen</label><textarea id="z-msg" name="nachricht" rows="3" required></textarea>
+        <button type="submit">Abschicken</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <span>Laura Matthes · laura.matthes@gruene-mering.de · kandidiert für BÜNDNIS 90/DIE GRÜNEN Mering · Fotos: Klaus Trinnes, Ralf Hermle</span>
+    <span><a href="../../impressum.html">Impressum</a> · <a href="../../datenschutz.html">Datenschutz</a> · <a href="https://www.instagram.com/lauramatthes/">Instagram</a></span>
+  </footer>
+</div>
+<script src="../../shared/switcher.js" defer></script>
+</body>
+</html>

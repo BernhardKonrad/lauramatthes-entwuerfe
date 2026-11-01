@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Laura Matthes – Im Gespräch</title>
+<meta name="description" content="Fragen Sie Laura Matthes – Zweite Bürgermeisterin von Mering. Am 17.01.2027 zur Bürgermeisterin wählen.">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<style>
+  :root {
+    --bg: #e9edf3; --navy: #0b1f44; --mag: #c2007a; --me: #ffffff; --you: #0b1f44; --ink: #1c2230; --soft: #667085;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.55 var(--sans); min-height: 100vh; display: flex; justify-content: center; }
+  .app { width: 100%; max-width: 760px; min-height: 100vh; display: flex; flex-direction: column; background:
+      radial-gradient(circle at 10% 0%, rgba(194,0,122,.06), transparent 40%),
+      radial-gradient(circle at 100% 30%, rgba(11,31,68,.06), transparent 40%), #f4f6f9; box-shadow: 0 0 40px rgba(11,31,68,.08); }
+
+  .top { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: var(--navy); color: #fff; }
+  .top img { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; object-position: 30% 18%; border: 2px solid #fff; }
+  .top strong { display: block; font-size: 1.05rem; }
+  .top span { font-size: .8rem; opacity: .8; }
+  .top span::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #45d483; margin-right: 6px; }
+  .top .date { margin-left: auto; font-size: .78rem; text-align: right; line-height: 1.3; }
+  .top .date b { display: block; color: #ff8fd0; font-size: .95rem; }
+
+  .chat { flex: 1; padding: 20px 16px 8px; display: flex; flex-direction: column; gap: 10px; }
+  .day { align-self: center; font-size: .75rem; color: var(--soft); background: #fff; padding: 3px 12px; border-radius: 999px; margin: 4px 0 8px; }
+  .msg { max-width: 82%; padding: 11px 15px; border-radius: 18px; box-shadow: 0 1px 2px rgba(0,0,0,.06); animation: in .25s ease; }
+  .msg p { margin: 0 0 .5em; } .msg p:last-child { margin: 0; }
+  .msg ul { margin: .3em 0 .5em; padding-left: 1.2em; }
+  .laura { align-self: flex-start; background: var(--me); border-bottom-left-radius: 6px; }
+  .you { align-self: flex-end; background: var(--you); color: #fff; border-bottom-right-radius: 6px; }
+  .msg img { display: block; width: 100%; border-radius: 12px; margin: 2px 0 8px; }
+  .msg .claim { color: var(--mag); font-weight: 600; }
+  .typing { align-self: flex-start; background: #fff; padding: 12px 16px; border-radius: 18px; display: flex; gap: 4px; }
+  .typing i { width: 7px; height: 7px; border-radius: 50%; background: #a0a8b8; animation: blink 1s infinite; }
+  .typing i:nth-child(2) { animation-delay: .15s; } .typing i:nth-child(3) { animation-delay: .3s; }
+  @keyframes blink { 0%,80%,100% { opacity: .3; } 40% { opacity: 1; } }
+  @keyframes in { from { opacity: 0; transform: translateY(6px); } }
+
+  .replies { position: sticky; bottom: 0; padding: 12px 14px 80px; background: linear-gradient(transparent, #f4f6f9 30%); display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+  .replies button { font: 600 14px var(--sans); background: #fff; color: var(--navy); border: 1.5px solid var(--navy); border-radius: 999px; padding: 9px 14px; cursor: pointer; transition: background .15s, color .15s; }
+  .replies button:hover { background: var(--navy); color: #fff; }
+  .replies button.alt { border-color: var(--mag); color: var(--mag); }
+  .replies button.alt:hover { background: var(--mag); color: #fff; }
+
+  @media (max-width: 600px) {
+    .replies { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; scrollbar-width: none; }
+    .replies button { flex: none; }
+  }
+  .msg form { display: grid; gap: 8px; margin-top: 8px; }
+  .msg input, .msg textarea { font: inherit; padding: 9px 11px; border: 1px solid #d0d5dd; border-radius: 10px; width: 100%; }
+  .msg form button { font: 600 14px var(--sans); background: var(--mag); color: #fff; border: 0; border-radius: 999px; padding: 9px 16px; cursor: pointer; justify-self: start; }
+
+  details.all { margin: 10px 16px 0; background: #fff; border-radius: 12px; padding: 10px 14px; font-size: .9rem; }
+  details.all summary { cursor: pointer; font-weight: 600; color: var(--navy); }
+  details.all h3 { font-size: .95rem; margin: 1em 0 .2em; color: var(--navy); }
+  footer { padding: 16px; font-size: .78rem; color: var(--soft); text-align: center; }
+  footer a { color: var(--soft); }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top">
+    <img src="../../assets/fotos/laura-herbst-portrait.jpg" alt="" width="46" height="46">
+    <div><strong>Laura Matthes</strong><span>2. Bürgermeisterin · antwortet gern</span></div>
+    <div class="date">Bürgermeisterwahl<b>17.01.2027</b></div>
+  </div>
+
+  <div class="chat" id="chat" aria-live="polite">
+    <span class="day">Heute</span>
+  </div>
+
+  <div class="replies" id="replies" role="group" aria-label="Fragen an Laura"></div>
+
+  <details class="all">
+    <summary>Alle Antworten auf einen Blick lesen</summary>
+    <div id="all"></div>
+  </details>
+
+  <footer>
+    Klar. Verlässlich. Besser für Mering. · Laura Matthes kandidiert für BÜNDNIS 90/DIE GRÜNEN Mering<br>
+    <a href="../../impressum.html">Impressum</a> · <a href="../../datenschutz.html">Datenschutz</a> · Fotos: Klaus Trinnes, Ralf Hermle
+  </footer>
+</div>
+
+<script>
+  const F = '../../assets/fotos/';
+  const QA = {
+    wer: { q: 'Wer sind Sie?', a: [
+      `<img src="${F}laura-freigestellt.png" alt="Laura Matthes" style="background:#eef1f5;max-height:260px;object-fit:contain">`,
+      '<p>Ich bin Laura Matthes, geboren 1984 in Aachen. Mit meinem Mann und unseren drei Kindern (6, 10 und 12) lebe ich in Mering.</p><p>Ich bin Textilökonomin mit einem Master aus Schweden und arbeite als Bedarfsplanerin. Seit 2026 bin ich Marktgemeinderätin und 2. Bürgermeisterin.</p><p>Und ich habe das Sportabzeichen in Gold – aber viel mehr Lust als Zeit für Musik und Sport. 😊</p>' ] },
+    warum: { q: 'Warum kandidieren Sie?', a: [
+      '<p>Mering ist für meine Familie und mich zur Heimat geworden: kurze Wege, lebendige Vereine, aktive Kirchengemeinden, ein starkes Miteinander. Das möchte ich bewahren.</p>',
+      '<p>Aber in einer sich wandelnden Welt können wir nicht stehen bleiben. Mering soll gut aufgestellt sein für die Zukunft – und dafür braucht es mehr als Repräsentation.</p><p class="claim">Jetzt ist die Zeit für einen neuen Stil: mutig, sachlich, lösungsorientiert.</p>' ] },
+    erwarten: { q: 'Was darf ich von Ihnen erwarten?', a: [
+      '<p>Dass ich …</p><ul><li>überparteilich und lösungsorientiert arbeite</li><li>mich an Recht und Gesetz halte und eigene Fehler offen eingestehe</li><li>zuhöre und Ihren Anliegen Raum gebe</li><li>verantwortungsvoll mit öffentlichem Geld umgehe</li><li>den Mitarbeitenden im Rathaus respektvoll begegne</li><li>transparent kommuniziere, auch wenn es unbequem ist</li></ul>' ] },
+    nicht: { q: 'Und was nicht? 🤔', alt: true, a: [
+      '<p>Ehrlich gesagt: Erwarten Sie nicht, …</p><ul><li>dass ich keinen eigenen Standpunkt habe</li><li>dass ich keine Fehler mache</li><li>dass jeder Bürgerwunsch erfüllt werden kann</li><li>dass Merings Finanzen morgen saniert sind</li><li>dass ich jede Vereinsfeier besuchen kann</li><li>dass ich immer sofort eine Lösung parat habe</li></ul><p>Auch unbequeme Entscheidungen gehören dazu.</p>' ] },
+    verwaltung: { q: 'Was ändert sich im Rathaus?', a: [
+      `<img src="${F}thema-verwaltung.jpg" alt="Laura Matthes am Schreibtisch">`,
+      '<p>Zufriedene Mitarbeiterinnen und Mitarbeiter sind der beste Service für Sie. Ich will verlässliche Personalplanung, klare Zuständigkeiten, Weiterbildung und Technik, die die Arbeit erleichtert.</p><p>Digitale Wege, wo sie Zeit sparen – aber das persönliche Gespräch bleibt, wo es gebraucht wird.</p><p class="claim">Wer gut arbeiten kann, kann auch gut helfen.</p>' ] },
+    wirtschaft: { q: 'Und für die Wirtschaft?', a: [
+      '<p>Mering braucht eine klare wirtschaftliche Ausrichtung statt Einzelfallentscheidungen. Welche Branchen wollen wir gezielt ansiedeln? Danach entwickeln wir die Flächen.</p><p>Dazu kommt eine feste Anlaufstelle im Rathaus, die Genehmigungen begleitet und Fristen im Blick behält.</p><p class="claim">Verlässliche Ansprechpartner sind der beste Standortfaktor.</p>' ] },
+    familien: { q: 'Was tun Sie für Familien?', a: [
+      `<img src="${F}thema-familie.jpg" alt="Laura Matthes mit Kindern" style="aspect-ratio:4/3;object-fit:cover;object-position:center 30%">`,
+      '<p>Keine Familie soll um einen Betreuungsplatz zittern müssen. Ich plane nach den tatsächlichen Geburten- und Zuzugszahlen – mit Strukturen, die mitwachsen und sich wieder anpassen lassen.</p><p class="claim">Planungssicherheit für Familien. Verlässlichkeit für den Haushalt.</p>' ] },
+    zukunft: { q: 'Verkehr, Bauen, Natur, Energie?', a: [
+      '<p>Damit Mering so lebenswert bleibt, muss es sich weiterentwickeln:</p><ul><li><b>Verkehr:</b> Lösungen, die alle mitdenken – mit sicheren Fuß- und Radwegen</li><li><b>Bauen:</b> maßvoll nachverdichten, Ortscharakter erhalten, bezahlbar wohnen</li><li><b>Natur:</b> Naturschutz schützt auch uns – bei jeder Entscheidung</li><li><b>Energie:</b> Photovoltaik und kalkulierbare Wärme für kommunale Gebäude</li></ul>' ] },
+    kontakt: { q: 'Wie erreiche ich Sie?', alt: true, a: [
+      '<p>Am einfachsten direkt hier – oder per Mail an laura.matthes@gruene-mering.de und auf Instagram @lauramatthes.</p><form name="anliegen" method="POST" data-netlify="true" onsubmit="event.preventDefault(); this.querySelector(\'button\').textContent=\'Danke, kommt an!\';"><input type="hidden" name="form-name" value="anliegen"><input name="name" placeholder="Ihr Name" required><input name="email" type="email" placeholder="Ihre E-Mail" required><textarea name="nachricht" rows="3" placeholder="Ihre Nachricht" required></textarea><button>Senden</button></form>' ] },
+  };
+
+  const chat = document.getElementById('chat');
+  const replies = document.getElementById('replies');
+  const asked = new Set();
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function bubble(html, who) {
+    const d = document.createElement('div');
+    d.className = 'msg ' + who; d.innerHTML = html;
+    chat.appendChild(d);
+    d.scrollIntoView({ block: 'end', behavior: reduce ? 'auto' : 'smooth' });
+  }
+  async function laura(parts) {
+    for (const html of parts) {
+      const t = document.createElement('div'); t.className = 'typing'; t.innerHTML = '<i></i><i></i><i></i>';
+      chat.appendChild(t); t.scrollIntoView({ block: 'end' });
+      await wait(reduce ? 0 : 650);
+      t.remove(); bubble(html, 'laura');
+    }
+  }
+  function renderReplies() {
+    replies.innerHTML = '';
+    Object.entries(QA).filter(([k]) => !asked.has(k)).forEach(([k, v]) => {
+      const b = document.createElement('button');
+      b.textContent = v.q; if (v.alt) b.className = 'alt';
+      b.addEventListener('click', () => ask(k));
+      replies.appendChild(b);
+    });
+    if (!replies.children.length) {
+      const b = document.createElement('button'); b.textContent = 'Nochmal von vorn'; b.className = 'alt';
+      b.onclick = () => location.reload(); replies.appendChild(b);
+    }
+  }
+  async function ask(k) {
+    asked.add(k); replies.innerHTML = '';
+    bubble(QA[k].q, 'you');
+    await laura(QA[k].a);
+    renderReplies();
+  }
+
+  document.getElementById('all').innerHTML = Object.values(QA).map(v => `<h3>${v.q}</h3>${v.a.filter(h => !h.startsWith('<img')).join('')}`).join('');
+
+  (async () => {
+    await laura([
+      '<p>Hallo und schön, dass Sie da sind! 👋</p>',
+      '<p>Ich bin Laura Matthes, 2. Bürgermeisterin von Mering. Am <b>17. Januar 2027</b> bewerbe ich mich als Bürgermeisterin.</p><p>Fragen Sie mich, was Sie wissen möchten:</p>'
+    ]);
+    renderReplies();
+  })();
+</script>
+<script src="../../shared/switcher.js" defer></script>
+</body>
+</html>

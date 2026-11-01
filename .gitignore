@@ -1,0 +1,12 @@
+# Interne Unterlagen – niemals veröffentlichen
+trello/
+flyer/
+Flyer/
+*.json
+*.docx
+*.pdf
+*.txt
+
+# Lokale Werkzeuge
+.claude/
+!robots.txt

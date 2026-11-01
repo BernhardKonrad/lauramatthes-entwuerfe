@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Laura Matthes – Klartext</title>
+<meta name="description" content="Was Sie von Laura Matthes erwarten dürfen – und was nicht. Am 17.01.2027 zur Bürgermeisterin von Mering wählen.">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<style>
+  :root {
+    --navy: #0b1f44; --mag: #c2007a; --grey: #e4e2de; --paper: #f5f4f1; --ink: #161a22; --soft: #5a6070;
+    --cond: "Bahnschrift Condensed", "Bahnschrift", "Arial Narrow", "Roboto Condensed", Impact, sans-serif;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 17px/1.55 var(--sans); }
+  a { color: var(--navy); }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); }
+  .cond { font-family: var(--cond); font-style: italic; font-weight: 700; }
+
+  .hero { display: grid; grid-template-columns: 1.3fr .7fr; align-items: end; gap: 20px; padding-top: clamp(28px, 5vw, 60px); }
+  .hero .wahl { font: italic 700 1.1rem var(--cond); color: var(--navy); display: flex; align-items: center; gap: .4em; margin: 0 0 18px; }
+  .hero .wahl i { display: inline-grid; place-items: center; width: 1.5em; height: 1.5em; border: 2px solid var(--mag); color: var(--mag); border-radius: 50%; font-style: normal; }
+  .hero h1 { margin: 0; font: italic 700 clamp(3rem, 9vw, 7rem)/.9 var(--cond); text-transform: uppercase; color: var(--navy); }
+  .hero h1 span { color: var(--mag); }
+  .hero p.lead { font-size: clamp(1.1rem, 2vw, 1.35rem); color: var(--soft); max-width: 30em; margin: 18px 0 30px; }
+  .hero img { width: 100%; max-width: 330px; justify-self: center; filter: drop-shadow(0 18px 24px rgba(11,31,68,.2)); margin-bottom: -2px; }
+
+  .switch { display: none; margin: 0 0 14px; background: #fff; border-radius: 999px; padding: 4px; box-shadow: 0 2px 10px rgba(0,0,0,.06); }
+  .switch button { flex: 1; font: italic 700 1rem var(--cond); border: 0; background: transparent; padding: 10px 12px; border-radius: 999px; cursor: pointer; color: var(--navy); }
+  .switch button[aria-pressed="true"] { background: var(--navy); color: #fff; }
+  .switch button.no[aria-pressed="true"] { background: var(--mag); }
+
+  .table { position: relative; border-top: 6px solid var(--navy); }
+  .head, .row { display: grid; grid-template-columns: 1fr 1fr; }
+  .head div { padding: 22px 24px; font: italic 700 clamp(1.3rem, 2.6vw, 2rem)/1.05 var(--cond); }
+  .head .yes { background: var(--navy); color: #fff; }
+  .head .no { background: var(--mag); color: #fff; }
+  .head u { text-decoration-thickness: 3px; text-underline-offset: 4px; }
+  .row { background: #fff; border-bottom: 1px solid #e3e0da; transition: background .2s; }
+  .row div { padding: 18px 24px 18px 56px; position: relative; font-size: 1.02rem; }
+  .row div::before { position: absolute; left: 20px; top: 18px; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; font-size: .8rem; font-weight: 800; }
+  .row .yes::before { content: "✓"; background: var(--navy); color: #fff; }
+  .row .no { color: var(--soft); border-left: 1px solid #e3e0da; }
+  .row .no::before { content: "✕"; background: var(--mag); color: #fff; }
+  .row:hover { background: #fbf2f7; }
+  .row:hover .no { color: var(--ink); }
+  .row.in { animation: rowin .5s backwards; }
+  @keyframes rowin { from { opacity: 0; transform: translateY(10px); } }
+
+  .claim { text-align: right; margin: 28px 0 0; }
+  .claim span { display: inline-block; background: var(--mag); color: #fff; font: italic 700 clamp(1.3rem, 3vw, 2rem)/1 var(--cond); padding: .35em .6em; }
+
+  .why { padding: clamp(56px, 8vw, 100px) 0; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 70px); align-items: center; }
+  .why img { width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: 30% 15%; }
+  .why h2 { font: italic 700 clamp(2rem, 4.5vw, 3.2rem)/1 var(--cond); text-transform: uppercase; color: var(--navy); margin: 0 0 .4em; }
+  .why p { color: var(--soft); }
+  .why .sig { font-family: var(--cond); font-style: italic; font-weight: 700; color: var(--navy); font-size: 1.3rem; }
+
+  .themes { background: var(--navy); color: #fff; padding: clamp(50px, 8vw, 90px) 0; }
+  .themes h2 { font: italic 700 clamp(2rem, 4.5vw, 3.2rem)/1 var(--cond); text-transform: uppercase; margin: 0 0 30px; }
+  .themes h2 span { color: #ff7fc4; }
+  .tgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .t { border-top: 4px solid var(--mag); padding-top: 16px; }
+  .t strong { display: block; font: italic 700 1.35rem/1.05 var(--cond); text-transform: uppercase; margin-bottom: 8px; }
+  .t p { margin: 0; font-size: .93rem; opacity: .85; }
+
+  .contact { padding: clamp(50px, 8vw, 90px) 0; text-align: center; }
+  .contact h2 { font: italic 700 clamp(1.8rem, 4vw, 2.8rem)/1.05 var(--cond); color: var(--navy); margin: 0 0 .4em; }
+  .contact a.btn { display: inline-block; background: var(--navy); color: #fff; text-decoration: none; padding: 13px 24px; font-weight: 700; margin: 6px; }
+  .contact a.btn.m { background: var(--mag); }
+  footer { border-top: 1px solid #dedad3; padding: 20px clamp(16px, 4vw, 40px) 28px; font-size: .82rem; color: var(--soft); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+
+  @media (max-width: 820px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero img { max-width: 220px; grid-row: 1; }
+    .switch { display: flex; }
+    .head, .row { grid-template-columns: 1fr; }
+    .table[data-show="yes"] .no, .table[data-show="no"] .yes { display: none; }
+    .row .no { border-left: 0; }
+    .why, .tgrid { grid-template-columns: 1fr 1fr; }
+    .why { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 520px) { .tgrid { grid-template-columns: 1fr; } }
+  @media (prefers-reduced-motion: reduce) { .row.in { animation: none; } }
+</style>
+</head>
+<body>
+
+<section class="wrap hero">
+  <div>
+    <p class="wahl"><i>✕</i>Am 17.01.2027 zur Bürgermeisterin wählen</p>
+    <h1>Klar&shy;text<br><span>statt Versprechen.</span></h1>
+    <p class="lead">Keine leeren Versprechen: <strong>Laura Matthes</strong>, 2. Bürgermeisterin, sagt klar, woran Sie bei ihr sind – und woran nicht.</p>
+  </div>
+  <img src="../../assets/fotos/laura-freigestellt-arme.png" alt="Laura Matthes mit verschränkten Armen" width="775" height="1162">
+</section>
+
+<section class="wrap" aria-label="Erwartungen">
+  <div class="switch" role="group" aria-label="Ansicht wählen">
+    <button class="yes" aria-pressed="true" data-show="yes">Was Sie erwarten dürfen</button>
+    <button class="no" aria-pressed="false" data-show="no">Was nicht</button>
+  </div>
+  <div class="table" data-show="yes">
+    <div class="head"><div class="yes">Was Sie von mir erwarten dürfen:</div><div class="no">Was Sie <u>nicht</u> von mir erwarten dürfen:</div></div>
+    <div class="row"><div class="yes">Dass ich überparteilich und lösungsorientiert arbeite</div><div class="no">Dass ich keinen eigenen Standpunkt habe</div></div>
+    <div class="row"><div class="yes">Dass ich mich an Recht und Gesetz halte und eigene Fehler offen eingestehe und korrigiere</div><div class="no">Dass ich keine Fehler mache</div></div>
+    <div class="row"><div class="yes">Dass ich zuhöre und Bürgerinnen und Bürgern Raum für ihre Anliegen gebe</div><div class="no">Dass jeder Bürgerwunsch erfüllt werden kann</div></div>
+    <div class="row"><div class="yes">Dass ich verantwortungsvoll mit öffentlichen Geldern umgehe</div><div class="no">Dass Merings Finanzen morgen saniert sind</div></div>
+    <div class="row"><div class="yes">Dass ich mich den Mitarbeiterinnen und Mitarbeitern der Gemeinde gegenüber verbindlich und respektvoll verhalte</div><div class="no">Dass jeder gleich glücklich mit mir ist. Auch unbequeme Entscheidungen gehören dazu.</div></div>
+    <div class="row"><div class="yes">Dass ich meinen Aufgaben gewissenhaft nachkomme und mich für Mering einsetze</div><div class="no">Dass ich jede Vereinsfeier besuchen kann</div></div>
+    <div class="row"><div class="yes">Dass ich transparent kommuniziere, auch wenn es unbequem ist</div><div class="no">Dass ich immer sofort eine Lösung parat habe</div></div>
+  </div>
+  <p class="claim"><span>Klar. Verlässlich. Besser für Mering.</span></p>
+</section>
+
+<section class="wrap why">
+  <img src="../../assets/fotos/laura-garten-gehend.jpg" alt="Laura Matthes im Garten" loading="lazy">
+  <div>
+    <h2>Mehr als Repräsentation.</h2>
+    <p>Mering ist für meine Familie und mich zur Heimat geworden. Wir leben gern hier, in einer Gemeinde mit kurzen Wegen, lebendigen Vereinen, aktiven Kirchengemeinden und einem starken Miteinander. Genau das möchte ich bewahren. Aber in einer sich wandelnden Welt können wir nicht stehen bleiben.</p>
+    <p>Als Gemeinderätin und 2. Bürgermeisterin kenne ich die Aufgaben im Rathaus aus der täglichen Arbeit. Als Textilökonomin und Bedarfsplanerin weiß ich, wie man vorausschauend plant und Ressourcen sinnvoll einsetzt.</p>
+    <p>Jetzt ist die Zeit für einen neuen Stil in der Kommunalpolitik: mutig, sachlich, lösungsorientiert.</p>
+    <p class="sig">Ihre Laura Matthes</p>
+  </div>
+</section>
+
+<section class="themes">
+  <div class="wrap">
+    <h2>Vier Mal <span>besser.</span></h2>
+    <div class="tgrid">
+      <div class="t"><strong>Für die Verwaltung</strong><p>Gute Rahmenbedingungen für die Mitarbeitenden. Digital, wo es Zeit spart – persönlich, wo es gebraucht wird.</p></div>
+      <div class="t"><strong>Für die Wirtschaft</strong><p>Klare Ausrichtung statt Einzelfall und eine feste Anlaufstelle für Unternehmen im Rathaus.</p></div>
+      <div class="t"><strong>Für Familien</strong><p>Betreuung vorausschauend planen – mit Strukturen, die mitwachsen und sich anpassen lassen.</p></div>
+      <div class="t"><strong>Für Merings Zukunft</strong><p>Sichere Wege, maßvolles Bauen, Naturschutz und Energie, die kalkulierbar bleibt.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap contact">
+  <h2>Ich bitte Sie um Ihr Vertrauen am 17.01.2027.</h2>
+  <a class="btn" href="mailto:laura.matthes@gruene-mering.de">E-Mail schreiben</a>
+  <a class="btn m" href="https://www.instagram.com/lauramatthes/">@lauramatthes</a>
+</section>
+
+<footer>
+  <span>Laura Matthes kandidiert für BÜNDNIS 90/DIE GRÜNEN Mering · Fotos: Klaus Trinnes, Ralf Hermle</span>
+  <span><a href="../../impressum.html">Impressum</a> · <a href="../../datenschutz.html">Datenschutz</a></span>
+</footer>
+
+<script>
+  const table = document.querySelector('.table');
+  document.querySelectorAll('.switch button').forEach(b => b.addEventListener('click', () => {
+    table.dataset.show = b.dataset.show;
+    document.querySelectorAll('.switch button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+  }));
+  const rows = document.querySelectorAll('.row');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .2 });
+    rows.forEach((r, i) => { r.style.animationDelay = (i * 60) + 'ms'; io.observe(r); });
+  } else rows.forEach(r => r.classList.add('in'));
+</script>
+<script src="../../shared/switcher.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Laura Matthes – Mering, Ort für Ort</title>
+<meta name="description" content="Laura Matthes' Ziele für Mering – auf einer Karte erkunden. Am 17.01.2027 zur Bürgermeisterin wählen.">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<style>
+  :root {
+    --bg: #eef1f4; --land: #f8f6f1; --block: #e2ded5; --water: #b9d3e3; --green: #d6e3d2; --rail: #7d8696;
+    --navy: #0b1f44; --mag: #c2007a; --ink: #1c2230; --soft: #5a6274;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 var(--sans); }
+  a { color: var(--navy); }
+
+  header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px clamp(16px, 4vw, 40px); }
+  .who { display: flex; align-items: center; gap: 12px; }
+  .who img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; object-position: 50% 15%; }
+  .who strong { display: block; color: var(--navy); font-size: 1.05rem; }
+  .who span { font-size: .85rem; color: var(--soft); }
+  .date { background: var(--navy); color: #fff; border-radius: 999px; padding: 8px 16px; font-weight: 600; font-size: .9rem; white-space: nowrap; }
+  .date b { color: #ff8fd0; }
+
+  .intro { padding: 8px clamp(16px, 4vw, 40px) 20px; max-width: 900px; }
+  .intro h1 { font-size: clamp(1.9rem, 4.5vw, 3rem); line-height: 1.1; margin: 0 0 .3em; color: var(--navy); letter-spacing: -.01em; }
+  .intro h1 em { color: var(--mag); font-style: normal; }
+  .intro p { margin: 0; color: var(--soft); font-size: 1.08rem; }
+
+  .stage { display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px; padding: 0 clamp(16px, 4vw, 40px) 40px; align-items: start; }
+  .map { background: #fff; border-radius: 18px; padding: 10px; box-shadow: 0 10px 30px rgba(11,31,68,.08); position: relative; }
+  .map svg { display: block; width: 100%; height: auto; border-radius: 12px; }
+  .map-note { position: absolute; left: 22px; bottom: 18px; font-size: .72rem; color: var(--soft); background: rgba(255,255,255,.85); padding: 2px 8px; border-radius: 6px; }
+
+  .pin { cursor: pointer; }
+  .pin circle.halo { fill: var(--mag); opacity: 0; transition: opacity .2s; }
+  .pin circle.dot { fill: var(--navy); stroke: #fff; stroke-width: 3; transition: fill .2s; }
+  .pin text { font: 700 13px var(--sans); fill: #fff; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+  .pin .label { font: 600 12px var(--sans); fill: var(--navy); text-anchor: middle; paint-order: stroke; stroke: var(--land); stroke-width: 4px; }
+  .pin:hover circle.dot, .pin:focus circle.dot, .pin.active circle.dot { fill: var(--mag); }
+  .pin.active circle.halo { opacity: .22; animation: pulse 1.8s infinite; }
+  .pin:focus { outline: none; }
+  @keyframes pulse { 0%,100% { r: 20; } 50% { r: 26; } }
+
+  .panel { background: #fff; border-radius: 18px; overflow: hidden; box-shadow: 0 10px 30px rgba(11,31,68,.08); position: sticky; top: 16px; }
+  .panel img { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; }
+  .panel-body { padding: 22px 24px 26px; }
+  .tag { display: inline-block; background: #fbe3f1; color: var(--mag); font-weight: 700; font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; }
+  .panel h2 { margin: .5em 0 .3em; font-size: 1.5rem; line-height: 1.2; color: var(--navy); }
+  .panel p { margin: 0 0 .8em; color: var(--soft); }
+  .panel .claim { color: var(--navy); font-weight: 600; border-left: 3px solid var(--mag); padding-left: 12px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 clamp(16px, 4vw, 40px) 10px; }
+  .chips button { font: 600 14px var(--sans); border: 1px solid #cfd5df; background: #fff; color: var(--navy); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+  .chips button[aria-pressed="true"] { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+  form { display: grid; gap: 10px; margin-top: 10px; }
+  input, textarea { font: inherit; padding: 10px 12px; border: 1px solid #cfd5df; border-radius: 10px; width: 100%; }
+  form button { font: 600 15px var(--sans); background: var(--mag); color: #fff; border: 0; border-radius: 999px; padding: 11px 18px; cursor: pointer; justify-self: start; }
+
+  footer { padding: 24px clamp(16px, 4vw, 40px) 30px; font-size: .85rem; color: var(--soft); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; border-top: 1px solid #d9dee6; }
+  @media (max-width: 900px) { .stage { grid-template-columns: 1fr; } .panel { position: static; } }
+  @media (max-width: 520px) { .date { font-size: .78rem; padding: 6px 12px; } .who span { display: none; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="who">
+    <img src="../../assets/fotos/laura-herbst-portrait.jpg" alt="" width="48" height="48">
+    <div><strong>Laura Matthes</strong><span>Klar. Verlässlich. Besser für Mering.</span></div>
+  </div>
+  <div class="date"><b>✕</b> 17.01.2027</div>
+</header>
+
+<section class="intro">
+  <h1>Mering, <em>Ort für Ort.</em></h1>
+  <p>Politik passiert nicht im Abstrakten, sondern an Orten, die wir alle kennen. Tippen Sie auf einen Punkt der Karte und sehen Sie, was ich dort besser machen will.</p>
+</section>
+
+<div class="chips" role="group" aria-label="Orte auswählen"></div>
+
+<section class="stage">
+  <div class="map">
+    <svg viewBox="0 0 800 560" role="img" aria-labelledby="map-title">
+      <title id="map-title">Schematische Karte von Mering mit sieben Orten</title>
+      <rect width="800" height="560" fill="#f8f6f1"/>
+      <!-- Grün und Wasser -->
+      <path d="M0 0 H170 C150 120 190 220 150 330 C120 420 160 500 140 560 H0 Z" fill="#d6e3d2"/>
+      <path d="M120 0 C95 90 150 170 120 260 C95 340 135 420 110 560" fill="none" stroke="#b9d3e3" stroke-width="18" stroke-linecap="round"/>
+      <text x="62" y="300" font-size="13" fill="#5b7a8f" font-style="italic" transform="rotate(-80 62 300)">Paar</text>
+      <ellipse cx="690" cy="470" rx="120" ry="70" fill="#d6e3d2"/>
+      <!-- Bebauung -->
+      <g fill="#e2ded5">
+        <rect x="250" y="120" width="90" height="60" rx="6"/><rect x="355" y="110" width="70" height="80" rx="6"/>
+        <rect x="250" y="200" width="70" height="70" rx="6"/><rect x="430" y="210" width="80" height="60" rx="6"/>
+        <rect x="250" y="300" width="110" height="60" rx="6"/><rect x="380" y="300" width="70" height="80" rx="6"/>
+        <rect x="470" y="300" width="80" height="50" rx="6"/><rect x="260" y="390" width="80" height="70" rx="6"/>
+        <rect x="360" y="410" width="90" height="60" rx="6"/><rect x="560" y="120" width="160" height="110" rx="6" fill="#dcd6cb"/>
+        <rect x="600" y="300" width="110" height="80" rx="6" fill="#ebe6dc" stroke="#cfc7b8" stroke-dasharray="6 5"/>
+      </g>
+      <!-- Straßen -->
+      <g stroke="#ffffff" stroke-width="12" fill="none" stroke-linecap="round">
+        <path d="M200 280 H760"/><path d="M370 40 V530"/><path d="M200 100 C300 160 460 150 560 90"/>
+      </g>
+      <g stroke="#d9d3c7" stroke-width="1" fill="none"><path d="M200 280 H760"/><path d="M370 40 V530"/></g>
+      <!-- Bahn -->
+      <path d="M220 560 L560 0" stroke="#7d8696" stroke-width="4" fill="none"/>
+      <path d="M220 560 L560 0" stroke="#fff" stroke-width="2" stroke-dasharray="10 10" fill="none"/>
+      <rect x="400" y="236" width="44" height="18" rx="4" fill="#7d8696" transform="rotate(-58 422 245)"/>
+
+      <g id="pins"></g>
+    </svg>
+    <span class="map-note">Schematisch, nicht maßstabsgetreu</span>
+  </div>
+
+  <aside class="panel" aria-live="polite">
+    <img id="p-img" src="" alt="">
+    <div class="panel-body">
+      <span class="tag" id="p-tag"></span>
+      <h2 id="p-title"></h2>
+      <div id="p-text"></div>
+    </div>
+  </aside>
+</section>
+
+<footer>
+  <span>Am 17.01.2027 zur Bürgermeisterin wählen · Laura Matthes kandidiert für BÜNDNIS 90/DIE GRÜNEN Mering · Fotos: Klaus Trinnes, Ralf Hermle</span>
+  <span><a href="../../impressum.html">Impressum</a> · <a href="../../datenschutz.html">Datenschutz</a></span>
+</footer>
+
+<script>
+  const F = '../../assets/fotos/';
+  const PLACES = [
+    { id: 'rathaus', n: 1, x: 330, y: 250, label: 'Rathaus', tag: 'Besser für die Verwaltung', title: 'Ein Rathaus, das für Sie arbeitet', img: 'thema-verwaltung.jpg',
+      text: '<p>Im Rathaus arbeiten Menschen, die Mering und seine Anliegen gut kennen. Dieses Wissen möchte ich sichern: mit verlässlicher Personalplanung, klaren Zuständigkeiten, Weiterbildung und Technik, die die Arbeit erleichtert.</p><p>Digitale Wege, wo sie Ihnen Zeit sparen. Das persönliche Gespräch, wo es gebraucht wird.</p><p class="claim">Wer gut arbeiten kann, kann auch gut helfen.</p>' },
+    { id: 'gewerbe', n: 2, x: 640, y: 175, label: 'Gewerbegebiet', tag: 'Besser für die Wirtschaft', title: 'Ausrichtung statt Einzelfall', img: 'thema-wirtschaft.jpg',
+      text: '<p>Welche Betriebe und Branchen wollen wir gezielt ansiedeln? Danach sollten wir die vorhandenen Flächen entwickeln – nicht umgekehrt.</p><p>Dazu gehört eine feste Anlaufstelle im Rathaus, die Genehmigungen begleitet, Fristen im Blick behält und bei Erweiterungen von Anfang an dabei ist.</p><p class="claim">Verlässliche Ansprechpartner sind der beste Standortfaktor.</p>' },
+    { id: 'kita', n: 3, x: 300, y: 425, label: 'Kita & Schule', tag: 'Besser für Familien', title: 'Kein Zittern um den Betreuungsplatz', img: 'thema-familie.jpg',
+      text: '<p>Der Bedarf an Krippen-, Kita- und Hortplätzen schwankt von Jahrgang zu Jahrgang. Ich setze auf Planung nach den tatsächlichen Geburten- und Zuzugszahlen und auf Strukturen, die mitwachsen.</p><p>Flexible Lösungen in Trägerschaft und Raumnutzung sind oft besser als Großprojekte, die jahrelang Geld binden.</p><p class="claim">Planungssicherheit für Familien. Verlässlichkeit für den Haushalt.</p>' },
+    { id: 'ortsmitte', n: 4, x: 470, y: 330, label: 'Ortsmitte', tag: 'Besser für Merings Zukunft', title: 'Unterwegs – sicher für alle', img: 'laura-herbst-portrait.jpg',
+      text: '<p>Unser Ort wächst. Wir brauchen Verkehrslösungen, die Entlastung bringen und alle Verkehrsteilnehmer mitdenken – zum Beispiel durch sichere Fuß- und Radwege.</p><p class="claim">Damit unser Zuhause so lebenswert bleibt, wie es ist.</p>' },
+    { id: 'neubau', n: 5, x: 655, y: 340, label: 'Neue Wohnungen', tag: 'Besser für Merings Zukunft', title: 'Maßvoll bauen, Charakter erhalten', img: 'laura-herbst-gehend.jpg',
+      text: '<p>Bei der Bebauung gilt: maßvoll nachverdichten, den Ortscharakter erhalten, bezahlbaren Wohnraum ermöglichen.</p>' },
+    { id: 'paar', n: 6, x: 150, y: 170, label: 'An der Paar', tag: 'Besser für Merings Zukunft', title: 'Natur, die uns schützt', img: 'laura-garten-gehend.jpg',
+      text: '<p>Naturschutz schützt auch uns und muss bei allen Entscheidungen eine elementare Rolle spielen. Grün- und Freiflächen sind Lebensraum und Erholungsort zugleich.</p>' },
+    { id: 'daecher', n: 7, x: 395, y: 145, label: 'Gemeindedächer', tag: 'Besser für Merings Zukunft', title: 'Energie, die kalkulierbar bleibt', img: 'laura-garten-quer.jpg',
+      text: '<p>Kommunale Gebäude will ich zukunftsfest machen – mit Photovoltaik und einer Wärmeversorgung, die langfristig kalkulierbar bleibt. So werden wir unabhängiger von schwankenden Energiepreisen.</p>' },
+    { id: 'sie', n: '?', x: 560, y: 470, label: 'Ihr Ort', tag: 'Ihr Anliegen', title: 'Und wo drückt bei Ihnen der Schuh?', img: 'laura-garten-quer.jpg',
+      text: '<p>Ihre Straße, Ihr Spielplatz, Ihr Schulweg? Schreiben Sie mir – ich lese jede Nachricht selbst.</p><form name="anliegen" method="POST" data-netlify="true" onsubmit="event.preventDefault(); this.querySelector(\'button\').textContent=\'Danke!\';"><input type="hidden" name="form-name" value="anliegen"><input name="ort" placeholder="Ort / Straße"><input name="email" type="email" placeholder="Ihre E-Mail" required><textarea name="nachricht" rows="3" placeholder="Ihr Anliegen" required></textarea><button>Senden</button></form>' },
+  ];
+
+  const svgNS = 'http://www.w3.org/2000/svg';
+  const pins = document.getElementById('pins');
+  const chips = document.querySelector('.chips');
+
+  PLACES.forEach(p => {
+    const g = document.createElementNS(svgNS, 'g');
+    g.setAttribute('class', 'pin'); g.setAttribute('tabindex', '0'); g.setAttribute('role', 'button');
+    g.setAttribute('aria-label', p.label); g.dataset.id = p.id;
+    g.innerHTML = `<circle class="halo" cx="${p.x}" cy="${p.y}" r="20"/><circle class="dot" cx="${p.x}" cy="${p.y}" r="15"/><text x="${p.x}" y="${p.y}">${p.n}</text><text class="label" x="${p.x}" y="${p.y + 32}">${p.label}</text>`;
+    g.addEventListener('click', () => show(p.id));
+    g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(p.id); } });
+    pins.appendChild(g);
+
+    const b = document.createElement('button');
+    b.textContent = p.label; b.dataset.id = p.id;
+    b.addEventListener('click', () => show(p.id));
+    chips.appendChild(b);
+  });
+
+  function show(id) {
+    const p = PLACES.find(x => x.id === id);
+    document.getElementById('p-img').src = F + p.img;
+    document.getElementById('p-img').alt = p.title;
+    document.getElementById('p-tag').textContent = p.tag;
+    document.getElementById('p-title').textContent = p.title;
+    document.getElementById('p-text').innerHTML = p.text;
+    pins.querySelectorAll('.pin').forEach(g => g.classList.toggle('active', g.dataset.id === id));
+    chips.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.id === id)));
+  }
+  show('rathaus');
+</script>
+<script src="../../shared/switcher.js" defer></script>
+</body>
+</html>
