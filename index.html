@@ -8,6 +8,7 @@
   <meta name="theme-color" content="#0b1f44">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
+  <script src="theme.js"></script>
 </head>
 <body>
 
@@ -19,6 +20,11 @@
       <span class="brand-name">Laura Matthes</span>
       <span class="brand-tag">Besser für Mering</span>
     </a>
+    <div class="theme-picker" role="group" aria-label="Farbschema">
+      <button type="button" data-theme-choice="standard" aria-pressed="false" title="Standard" aria-label="Farbschema Standard"><span class="sw sw-standard"></span></button>
+      <button type="button" data-theme-choice="dark" aria-pressed="false" title="Dunkel" aria-label="Farbschema Dunkel"><span class="sw sw-dark"></span></button>
+      <button type="button" data-theme-choice="mering" aria-pressed="false" title="Mering (Wappenfarben)" aria-label="Farbschema Mering"><span class="sw sw-mering"></span></button>
+    </div>
     <button class="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="Menü öffnen">
       <span></span><span></span>
     </button>
