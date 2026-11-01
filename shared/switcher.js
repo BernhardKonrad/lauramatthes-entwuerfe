@@ -1,22 +1,13 @@
-// Floating switcher shown on every design proposal.
+// Floating switcher shown on the backup designs.
 // Lives in a shadow root so it never collides with a variant's own styles.
 (() => {
   const VARIANTS = [
-    { id: '01-klassisch',   name: 'Klassisch' },
-    { id: '02-zeitung',     name: 'Meringer Zeitung' },
-    { id: '03-brief',       name: 'Brief an Mering' },
-    { id: '04-karte',       name: 'Mering-Karte' },
-    { id: '05-gespraech',   name: 'Im Gespräch' },
-    { id: '06-steckbrief',  name: 'Steckbrief' },
-    { id: '07-plakat',      name: 'Plakat' },
-    { id: '08-magazin',     name: 'Magazin' },
-    { id: '09-mitmachen',   name: 'Mitmachen' },
-    { id: '10-visitenkarte', name: 'Visitenkarte' },
-    { id: '11-klartext',    name: 'Klartext' },
-    { id: '12-flyer',       name: 'Digitaler Flyer' },
+    { id: '02-zeitung', name: 'Meringer Zeitung' },
+    { id: '04-karte',   name: 'Mering-Karte' },
+    { id: '08-magazin', name: 'Magazin' },
   ];
 
-  if (window.self !== window.top) return; // no bar inside the overview thumbnails
+  if (window.self !== window.top) return;
   const match = location.pathname.match(/varianten\/([^/]+)\//);
   const idx = match ? VARIANTS.findIndex(v => v.id === match[1]) : -1;
   if (idx < 0) return;
@@ -51,17 +42,17 @@
       .label { padding: 0 10px; display: flex; flex-direction: column; min-width: 0; }
       .label small { opacity: .6; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
       .label strong { font-weight: 600; overflow: hidden; text-overflow: ellipsis; }
-      .all { background: #fff; color: #111; font-weight: 600; }
-      .all:hover { background: #e9e9e9; }
-      .bar.collapsed .label, .bar.collapsed .nav, .bar.collapsed .all { display: none; }
-      @media (max-width: 480px) { .label small { display: none; } .all span { display: none; } }
+      .main { background: #fff; color: #111; font-weight: 600; }
+      .main:hover { background: #e9e9e9; }
+      .bar.collapsed .label, .bar.collapsed .nav, .bar.collapsed .main { display: none; }
+      @media (max-width: 480px) { .label small { display: none; } }
       @media print { .bar { display: none; } }
     </style>
     <div class="bar${collapsed ? ' collapsed' : ''}">
-      <a class="nav" href="${href(prev)}" title="Vorheriger Vorschlag: ${prev.name}" aria-label="Vorheriger Vorschlag">←</a>
-      <div class="label"><small>Vorschlag ${idx + 1} von ${VARIANTS.length}</small><strong>${cur.name}</strong></div>
-      <a class="nav" href="${href(next)}" title="Nächster Vorschlag: ${next.name}" aria-label="Nächster Vorschlag">→</a>
-      <a class="all" href="../../index.html" title="Alle Vorschläge"><span>Alle&nbsp;</span>▦</a>
+      <a class="nav" href="${href(prev)}" title="${prev.name}" aria-label="Vorheriges Backup">←</a>
+      <div class="label"><small>Backup ${idx + 1} von ${VARIANTS.length}</small><strong>${cur.name}</strong></div>
+      <a class="nav" href="${href(next)}" title="${next.name}" aria-label="Nächstes Backup">→</a>
+      <a class="main" href="../../index.html" title="Zur Hauptseite">Hauptseite</a>
       <button class="toggle" aria-label="Umschalter ein- oder ausklappen">${collapsed ? '‹›' : '×'}</button>
     </div>`;
 
