@@ -31,6 +31,22 @@ if ('IntersectionObserver' in window) {
   revealables.forEach(el => { el.classList.add('reveal'); io.observe(el); });
 }
 
+// Reels row: arrow buttons scroll by one card, disabled at either end
+const reels = document.querySelector('.reels');
+if (reels) {
+  const buttons = document.querySelectorAll('.reels-btn');
+  const step = () => (reels.querySelector('li')?.offsetWidth || 220) + 16;
+  const update = () => {
+    const max = reels.scrollWidth - reels.clientWidth - 2;
+    buttons.forEach(b => { b.disabled = b.dataset.dir === '-1' ? reels.scrollLeft <= 2 : reels.scrollLeft >= max; });
+  };
+  buttons.forEach(b => b.addEventListener('click', () =>
+    reels.scrollBy({ left: step() * Number(b.dataset.dir), behavior: 'smooth' })));
+  reels.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+}
+
 // Form: submit via fetch on Netlify, show a message locally
 const form = document.querySelector('form[name="anliegen"]');
 const status = form.querySelector('.form-status');

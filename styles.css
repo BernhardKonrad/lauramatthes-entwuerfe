@@ -335,6 +335,36 @@ p { margin: 0 0 1em; }
 @media (max-width: 620px) { .footer-inner { grid-template-columns: 1fr; } }
 
 /* ---------- Legal pages ---------- */
+/* ---------- Reels (Vorschau + Link zu Instagram) ---------- */
+.reels-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 28px; }
+.reels-head h2 { color: var(--on-primary); }
+.reels-intro { color: rgba(255,255,255,.78); max-width: 34em; margin: 0; }
+.reels-nav { display: flex; gap: 8px; flex: none; }
+.reels-btn { width: 46px; height: 46px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.5); background: transparent; color: var(--on-primary); font-size: 1.2rem; cursor: pointer; transition: background .2s, color .2s; }
+.reels-btn:hover { background: var(--on-primary); color: var(--primary); }
+.reels-btn:disabled { opacity: .3; cursor: default; background: transparent; color: var(--on-primary); }
+.reels { list-style: none; margin: 0 calc(var(--gutter) * -1); padding: 4px var(--gutter) 12px; display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 var(--gutter); scrollbar-width: none; }
+.reels::-webkit-scrollbar { display: none; }
+.reels li { flex: 0 0 clamp(190px, 22vw, 240px); scroll-snap-align: start; }
+.reel { position: relative; display: flex; flex-direction: column; justify-content: flex-end; aspect-ratio: 9 / 16; border-radius: 18px; overflow: hidden; color: #fff; text-decoration: none; background: #000; isolation: isolate; }
+.reel img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; transition: transform .4s ease; }
+.reel::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(0,0,0,.05) 35%, rgba(0,0,0,.78) 100%); }
+.reel:hover img, .reel:focus-visible img { transform: scale(1.05); }
+.reel-play { position: absolute; top: 50%; left: 50%; width: 58px; height: 58px; margin: -29px 0 0 -29px; border-radius: 50%; background: rgba(255,255,255,.22); backdrop-filter: blur(6px); border: 1.5px solid rgba(255,255,255,.7); transition: background .2s, transform .2s; }
+.reel-play::before { content: ""; position: absolute; left: 22px; top: 17px; border-style: solid; border-width: 12px 0 12px 19px; border-color: transparent transparent transparent #fff; }
+.reel:hover .reel-play, .reel:focus-visible .reel-play { background: var(--accent); border-color: var(--accent); transform: scale(1.08); }
+.reel-meta { padding: 16px 16px 18px; display: grid; gap: 4px; }
+.reel-meta strong { font-size: 1rem; line-height: 1.3; }
+.reel-date { font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; opacity: .8; }
+.reel--more { justify-content: center; align-items: center; text-align: center; gap: 10px; padding: 20px; background: transparent; border: 1.5px dashed rgba(255,255,255,.45); }
+.reel--more::after { display: none; }
+.reel--more:hover { background: rgba(255,255,255,.08); }
+.reel--more span:last-child { color: var(--accent-on-dark); font-weight: 600; }
+.reel-more-icon { color: var(--accent-on-dark); }
+.reels-note { margin: 16px 0 0; font-size: .85rem; color: rgba(255,255,255,.6); }
+@media (max-width: 620px) { .reels-nav { display: none; } .reels li { flex-basis: 64vw; } }
+@media (prefers-reduced-motion: reduce) { .reel img, .reel-play { transition: none; } }
+
 /* ---------- FAQ ---------- */
 .faq-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(28px, 5vw, 64px); align-items: start; }
 .faq-head { position: sticky; top: 96px; margin-bottom: 0; }
