@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Entwürfe für lauramatthes.de</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<style>
+  :root { --bg: #0e1220; --card: #171c2e; --line: #262d45; --ink: #f2f3f7; --soft: #a3a9bd; --mag: #ff4fae; --mag-d: #c2007a; --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 var(--sans); }
+  a { color: inherit; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); }
+  header { padding: clamp(36px, 6vw, 72px) 0 clamp(20px, 3vw, 32px); }
+  .eyebrow { color: var(--mag); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; font-size: .78rem; margin: 0 0 12px; }
+  h1 { font-size: clamp(2.1rem, 5vw, 3.4rem); line-height: 1.05; margin: 0 0 .4em; letter-spacing: -.02em; }
+  h2 { font-size: clamp(1.4rem, 3vw, 2rem); margin: 0 0 .3em; }
+  .lead { color: var(--soft); font-size: 1.1rem; max-width: 48em; margin: 0; }
+  .main-link { display: inline-flex; align-items: center; gap: 10px; margin-top: 22px; background: var(--mag-d); color: #fff; text-decoration: none; font-weight: 700; padding: 12px 20px; border-radius: 999px; }
+  .main-link:hover { background: #a0005f; }
+  section { padding: 34px 0 10px; border-top: 1px solid var(--line); margin-top: 26px; }
+  .section-lead { color: var(--soft); margin: 0 0 20px; max-width: 52em; }
+  .group { margin: 22px 0 8px; font-size: .8rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--soft); }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding-bottom: 10px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; transition: border-color .2s; }
+  .card:hover, .card:focus-within { border-color: var(--mag-d); }
+  .thumb { position: relative; display: block; aspect-ratio: 16/10; overflow: hidden; background: #0a0d18; }
+  .thumb iframe { position: absolute; top: 0; left: 0; width: 1280px; height: 800px; border: 0; transform-origin: 0 0; pointer-events: none; }
+  .meta { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .num { font-size: .78rem; font-weight: 700; color: var(--mag); letter-spacing: .1em; }
+  .meta h3 { margin: 0; font-size: 1.2rem; }
+  .meta p { margin: 0; color: var(--soft); font-size: .93rem; }
+  .tag { display: inline-block; margin-left: 8px; background: var(--mag-d); color: #fff; padding: 1px 7px; border-radius: 4px; font-size: .66rem; letter-spacing: .06em; vertical-align: middle; }
+  .actions { margin-top: auto; padding-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .actions a { text-decoration: none; font-weight: 600; font-size: .9rem; padding: 8px 14px; border-radius: 999px; background: #fff; color: #111; }
+  .actions a.sec { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+  .actions a:hover { background: var(--mag); color: #fff; border-color: var(--mag); }
+
+  .notes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; color: var(--soft); font-size: .93rem; padding: 26px 0 50px; }
+  .notes h3 { color: var(--ink); font-size: 1rem; margin: 0 0 .4em; }
+  .notes ul { margin: 0; padding-left: 1.1em; }
+  footer { color: #6e7590; font-size: .8rem; padding: 0 0 30px; }
+  @media (max-width: 980px) { .grid, .notes { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 620px) { .grid, .notes { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Entwürfe · Stand November 2026</p>
+    <h1>Entwürfe für lauramatthes.de</h1>
+    <p class="lead">Liebe Laura, hier findest du alle Varianten an einem Ort. Klick eine Karte an – unten auf jeder Seite kannst du mit ← → zur nächsten Variante blättern und mit „Alle“ hierher zurückkehren.</p>
+    <a class="main-link" href="../index.html">→ Zur Hauptseite (aktueller Stand)</a>
+  </header>
+
+  <section>
+    <h2>Instagram einbinden – 9 Varianten</h2>
+    <p class="section-lead">So könnten deine Videos auf der Seite erscheinen. Bisher sind drei echte Beiträge eingepflegt. Mit „12 Videos“ siehst du, wie es mit mehr Videos wirkt – die zusätzlichen sind als Platzhalter markiert.</p>
+
+    <p class="group">Eigener Instagram-Abschnitt</p>
+    <div class="grid" id="ig-section"></div>
+
+    <p class="group">Videos direkt bei den Themen</p>
+    <div class="grid" id="ig-topics"></div>
+
+    <p class="group">Instagram besonders prominent</p>
+    <div class="grid" id="ig-prominent"></div>
+  </section>
+
+  <section>
+    <h2>Frühere Design-Entwürfe</h2>
+    <p class="section-lead">Diese drei Gestaltungen hatten wir als Alternativen zur Hauptseite behalten.</p>
+    <div class="grid" id="backups"></div>
+  </section>
+
+  <div class="notes">
+    <div>
+      <h3>So gibst du Feedback</h3>
+      <ul>
+        <li>Welche Instagram-Variante gefällt dir am besten?</li>
+        <li>Varianten lassen sich kombinieren, z. B. „In den Themen (klein)“ plus „Handy im Einstieg“.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Videos auf der Seite</h3>
+      <ul>
+        <li>Jetzt: Ein Klick öffnet Instagram.</li>
+        <li>Später: Mit hochgeladenen MP4s laufen die Videos direkt auf der Seite – die Gestaltung bleibt gleich.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Noch Entwurf</h3>
+      <ul>
+        <li>Die Seite ist nicht für Suchmaschinen freigegeben.</li>
+        <li>Platzhalter sind mit einem pinken Etikett markiert.</li>
+      </ul>
+    </div>
+  </div>
+  <footer>Interne Entwurfsseite. Fotos: Klaus Trinnes, Ralf Hermle.</footer>
+</div>
+
+<script>
+  // [Nummer, Name, Beschreibung, Anker in der Vorschau, neu?]
+  const IG = {
+    'ig-section': [
+      [1, 'Leiste', 'Karten zum Wischen, Pfeile am Desktop. Wächst nach rechts.', 'reels'],
+      [2, 'Handy', 'Ein Smartphone-Rahmen zeigt ein Video, daneben die Playlist.', 'reels'],
+      [3, 'Raster', 'Wie dein Instagram-Profil, mit Themenfilter und „Mehr anzeigen“.', 'reels'],
+      [4, 'Story-Kreise', 'Runde Vorschauen, ein Klick öffnet die Videos im Vollbild zum Durchtippen.', 'reels'],
+      [5, 'Highlight + Liste', 'Das neueste Video groß, die übrigen als kompakte Liste.', 'reels'],
+    ],
+    'ig-topics': [
+      [6, 'In den Themen (klein)', 'Unter jedem Thema ein kleiner Streifen „Dazu auf Instagram“ mit passenden Videos.', 'themen', true],
+      [7, 'In den Themen (groß)', 'Das Foto jedes Themas wird zur großen Video-Vorschau.', 'themen', true],
+    ],
+    'ig-prominent': [
+      [8, 'Handy im Einstieg', 'Gleich oben neben dem Titel: ein Handy, das deine neuesten Videos durchblättert.', '', true],
+      [9, 'Instagram zuerst', 'Der Instagram-Abschnitt rückt direkt unter den Einstieg, dazu Videos in den Themen.', 'reels', true],
+    ],
+  };
+  const card = (href, href12, num, name, desc, isNew, src) => `
+    <div class="card">
+      <a class="thumb" href="${href}" tabindex="-1" aria-hidden="true"><iframe src="${src}" loading="lazy" tabindex="-1" title=""></iframe></a>
+      <div class="meta"><span class="num">${num}</span><h3>${name}${isNew ? '<span class="tag">NEU</span>' : ''}</h3><p>${desc}</p>
+        <div class="actions"><a href="${href}">Ansehen</a>${href12 ? `<a class="sec" href="${href12}">Mit 12 Videos</a>` : ''}</div></div>
+    </div>`;
+  for (const [id, list] of Object.entries(IG)) {
+    document.getElementById(id).innerHTML = list.map(([n, name, desc, anchor, isNew]) => {
+      const hash = anchor ? '#' + anchor : '';
+      return card(`../index.html?reels=${n}${hash}`, `../index.html?reels=${n}&demo=12${hash}`, `INSTAGRAM ${n}`, name, desc, isNew, `../index.html?reels=${n}${hash}`);
+    }).join('');
+  }
+  document.getElementById('backups').innerHTML = [
+    ['02-zeitung', 'Meringer Zeitung', 'Die Seite als Lokalzeitung: Aufmacher, Ressorts, Kommentar, Leserpost.'],
+    ['04-karte', 'Mering-Karte', 'Die Themen an Orten im Ort zum Antippen.'],
+    ['08-magazin', 'Magazin', 'Porträt mit Interview, „Eine Woche im Amt“ und großen Fotos.'],
+  ].map(([id, name, desc]) => card(`${id}/index.html`, '', 'BACKUP', name, desc, false, `${id}/index.html`)).join('');
+
+  const fit = () => document.querySelectorAll('.thumb').forEach(t => { t.querySelector('iframe').style.transform = `scale(${t.clientWidth / 1280})`; });
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

@@ -1,17 +1,24 @@
-// Renders Lauras Instagram-Beiträge in one of five layouts.
-// ?reels=1..5 picks the layout (default 1); ?demo=12 pads the list with placeholders
+// Renders Lauras Instagram-Beiträge in one of nine layouts.
+// ?reels=1..9 picks the layout (default 1); ?demo=12 pads the list with placeholders
 // so the layouts can be judged with a realistic number of videos.
 (() => {
   const app = document.getElementById('reels-app');
   if (!app || !window.LM_REELS) return;
 
+  // Draft phase: show the way to the overview page. Set to false before launch.
+  const DRAFT = true;
+
   const params = new URLSearchParams(location.search);
   const LAYOUTS = {
-    1: { name: 'Leiste', render: renderRow },
-    2: { name: 'Handy', render: renderPhone },
-    3: { name: 'Raster', render: renderGrid },
-    4: { name: 'Story-Kreise', render: renderStories },
-    5: { name: 'Highlight + Liste', render: renderFeature },
+    1: { name: 'Leiste', section: renderRow },
+    2: { name: 'Handy', section: renderPhone },
+    3: { name: 'Raster', section: renderGrid },
+    4: { name: 'Story-Kreise', section: renderStories },
+    5: { name: 'Highlight + Liste', section: renderFeature },
+    6: { name: 'In den Themen (klein)', section: renderRow, extras: [topicsMini] },
+    7: { name: 'In den Themen (groß)', section: renderRow, extras: [topicsBig] },
+    8: { name: 'Handy im Einstieg', section: renderRow, extras: [heroPhone] },
+    9: { name: 'Instagram zuerst', section: renderFeature, extras: [moveSectionUp, topicsMini] },
   };
   const layout = LAYOUTS[params.get('reels')] ? Number(params.get('reels')) : 1;
   const demoCount = Math.min(Number(params.get('demo')) || 0, 24);
@@ -21,7 +28,8 @@
     zukunft: 'Zukunft', persoenlich: 'Persönlich', nachwahl: 'Nachwahl',
   };
 
-  const items = [...window.LM_REELS];
+  const real = window.LM_REELS;
+  const items = [...real];
   const demoPosters = ['laura-garten-quer', 'thema-verwaltung', 'thema-familie', 'thema-wirtschaft', 'laura-herbst-portrait', 'laura-herbst-gehend', 'laura-garten-gehend'];
   const demoTopics = Object.keys(TOPICS);
   for (let i = items.length; i < demoCount; i++) {
@@ -31,6 +39,10 @@
     });
   }
 
+  // Every rendered item gets an id here, so the lightbox can find it again.
+  const REG = [];
+  const reg = it => REG.push(it) - 1;
+
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
   const fmtDate = d => d ? new Date(d + 'T12:00').toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' }) : '';
   const kindLabel = it => it.type === 'post' ? 'Beitrag' : 'Reel';
@@ -38,10 +50,23 @@
   const ig = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/></svg>';
   const extNote = '<p class="rx-note">Die Videos öffnen sich auf Instagram. Erst dann werden Daten an Meta übertragen.</p>';
 
+  // Items for one topic. Topics without own videos get repeats of the real ones,
+  // marked as placeholders, so the layout can be judged.
+  function topicItems(topic, n) {
+    const own = items.filter(it => it.topic === topic);
+    const out = own.slice(0, n);
+    const offset = Object.keys(TOPICS).indexOf(topic);
+    for (let k = 0; out.length < n && k < real.length; k++) {
+      const pick = real[(k + offset) % real.length];
+      if (!out.some(o => o.url === pick.url)) out.push({ ...pick, demo: true });
+    }
+    return out;
+  }
+
   // A tile either plays the self-hosted video in the lightbox or links out to Instagram.
-  function tileAttrs(it, i) {
+  function tileAttrs(it) {
     return it.video
-      ? `href="${esc(it.url)}" data-play="${i}"`
+      ? `href="${esc(it.url)}" data-play="${reg(it)}"`
       : `href="${esc(it.url)}" target="_blank" rel="noopener"`;
   }
   function playIcon(it) {
@@ -52,13 +77,17 @@
   function moreCard() {
     return `<a class="rx-more" href="${PROFILE}" target="_blank" rel="noopener">${ig}<strong>Alle Videos auf Instagram</strong><span>@lauramatthes</span></a>`;
   }
+  // 3:4 thumbnail shown whole inside a taller frame, the rest filled with a blurred copy
+  function blurPoster(it) {
+    return `<img class="rx-blur" src="${esc(it.poster)}" alt=""><img class="rx-fg" src="${esc(it.poster)}" alt="">`;
+  }
 
   /* 1 · Leiste: horizontally scrolling cards with arrows */
   function renderRow() {
     app.innerHTML = `
       <div class="rx-row-wrap">
         <ul class="rx-row" role="list">
-          ${items.map((it, i) => `<li><a class="rx-card" ${tileAttrs(it, i)}>
+          ${items.map(it => `<li><a class="rx-card" ${tileAttrs(it)}>
             <img src="${esc(it.poster)}" alt="" loading="lazy">${playIcon(it)}${badge(it)}
             <span class="rx-meta"><span class="rx-sub">${kindLabel(it)}${it.date ? ' · ' + fmtDate(it.date) : ''}</span><strong>${esc(it.title)}</strong></span>
           </a></li>`).join('')}
@@ -96,22 +125,27 @@
           <a class="rx-follow" href="${PROFILE}" target="_blank" rel="noopener">${ig} Laura auf Instagram folgen</a>
         </div>
       </div>${extNote}`;
-    const screen = app.querySelector('.rx-screen');
     const buttons = [...app.querySelectorAll('.rx-playlist button')];
-    let cur = 0;
+    const phone = phoneScreen(app.querySelector('.rx-screen'), i => buttons.forEach((b, j) => b.setAttribute('aria-current', String(j === i))));
+    buttons.forEach(b => b.onclick = () => phone.show(Number(b.dataset.i)));
+    app.querySelector('.rx-up').onclick = () => phone.show(phone.cur - 1);
+    app.querySelector('.rx-down').onclick = () => phone.show(phone.cur + 1);
+    phone.show(0);
+  }
+
+  // Screen content of a phone frame; shared by layout 2 and the hero phone.
+  function phoneScreen(screen, onShow) {
+    const state = { cur: 0, show };
     function show(i) {
-      cur = (i + items.length) % items.length;
-      const it = items[cur];
+      state.cur = (i + items.length) % items.length;
+      const it = items[state.cur];
       screen.innerHTML = it.video
         ? `<video src="${esc(it.video)}" poster="${esc(it.poster)}" controls playsinline preload="metadata"></video>`
-        : `<img class="rx-blur" src="${esc(it.poster)}" alt=""><img class="rx-fg" src="${esc(it.poster)}" alt=""><div class="rx-screen-ui"><strong>${esc(it.title)}</strong>
+        : `${blurPoster(it)}<div class="rx-screen-ui"><strong>${esc(it.title)}</strong>
              <a class="rx-btn" href="${esc(it.url)}" target="_blank" rel="noopener">${ig} Auf Instagram ansehen</a></div>${badge(it)}`;
-      buttons.forEach((b, j) => b.setAttribute('aria-current', String(j === cur)));
+      onShow && onShow(state.cur);
     }
-    buttons.forEach(b => b.onclick = () => show(Number(b.dataset.i)));
-    app.querySelector('.rx-up').onclick = () => show(cur - 1);
-    app.querySelector('.rx-down').onclick = () => show(cur + 1);
-    show(0);
+    return state;
   }
 
   /* 3 · Raster: profile-like grid with topic filter and "Mehr anzeigen" */
@@ -128,8 +162,8 @@
       <div class="rx-grid-foot"><button type="button" class="rx-btn rx-load">Mehr anzeigen</button><a class="rx-link" href="${PROFILE}" target="_blank" rel="noopener">${ig} Alle auf Instagram</a></div>${extNote}`;
     const grid = app.querySelector('.rx-grid'), load = app.querySelector('.rx-load');
     function draw() {
-      const list = items.map((it, i) => [it, i]).filter(([it]) => filter === 'alle' || it.topic === filter);
-      grid.innerHTML = list.slice(0, shown).map(([it, i]) => `<li><a class="rx-card rx-card--grid" ${tileAttrs(it, i)}>
+      const list = items.filter(it => filter === 'alle' || it.topic === filter);
+      grid.innerHTML = list.slice(0, shown).map(it => `<li><a class="rx-card rx-card--grid" ${tileAttrs(it)}>
         <img src="${esc(it.poster)}" alt="" loading="lazy">${playIcon(it)}${badge(it)}
         <span class="rx-meta"><span class="rx-sub">${it.topic ? TOPICS[it.topic] : kindLabel(it)}</span><strong>${esc(it.title)}</strong></span></a></li>`).join('');
       load.hidden = list.length <= shown;
@@ -180,7 +214,7 @@
       bars.forEach((b, j) => { b.style.transition = 'none'; b.style.width = j < cur ? '100%' : '0%'; });
       media.innerHTML = it.video
         ? `<video src="${esc(it.video)}" poster="${esc(it.poster)}" autoplay playsinline></video>`
-        : `<img class="rx-blur" src="${esc(it.poster)}" alt=""><img class="rx-fg" src="${esc(it.poster)}" alt="">`;
+        : blurPoster(it);
       media.insertAdjacentHTML('beforeend', `<div class="rx-story-ui"><strong>${esc(it.title)}</strong>
         <a class="rx-btn" href="${esc(it.url)}" target="_blank" rel="noopener">${ig} ${it.video ? 'Auf Instagram öffnen' : 'Ganzes Video auf Instagram'}</a></div>${badge(it)}`);
       const video = media.querySelector('video');
@@ -216,13 +250,13 @@
     const [first, ...rest] = items;
     app.innerHTML = `
       <div class="rx-feature">
-        <a class="rx-card rx-card--feature" ${tileAttrs(first, 0)}>
+        <a class="rx-card rx-card--feature" ${tileAttrs(first)}>
           <img src="${esc(first.poster)}" alt="" loading="lazy">${playIcon(first)}${badge(first)}
           <span class="rx-meta"><span class="rx-sub">Neu · ${kindLabel(first)}</span><strong>${esc(first.title)}</strong></span>
         </a>
         <div class="rx-list">
           <p class="rx-list-head">Weitere Videos</p>
-          <ul role="list">${rest.map((it, k) => `<li><a ${tileAttrs(it, k + 1)}>
+          <ul role="list">${rest.map(it => `<li><a ${tileAttrs(it)}>
             <img src="${esc(it.poster)}" alt="" loading="lazy">
             <span><span class="rx-sub">${kindLabel(it)}${it.topic ? ' · ' + TOPICS[it.topic] : ''}</span><strong>${esc(it.title)}</strong></span>${badge(it)}
             <span class="rx-go" aria-hidden="true">↗</span></a></li>`).join('')}</ul>
@@ -231,12 +265,75 @@
       </div>${extNote}`;
   }
 
+  /* 6 · In den Themen (klein): a small "Dazu auf Instagram" strip in every topic card */
+  function topicsMini() {
+    document.querySelectorAll('.topic[data-topic]').forEach(card => {
+      const list = topicItems(card.dataset.topic, 2);
+      if (!list.length) return;
+      card.querySelector('.topic-body').insertAdjacentHTML('beforeend', `
+        <div class="rx-topic-mini">
+          <p class="rx-topic-label">${ig} Dazu auf Instagram</p>
+          <ul role="list">${list.map(it => `<li><a ${tileAttrs(it)}>
+            <span class="rx-tm-thumb"><img src="${esc(it.poster)}" alt="" loading="lazy">${it.type === 'post' ? '' : '<span class="rx-tm-play" aria-hidden="true"></span>'}</span>
+            <span class="rx-tm-title">${esc(it.title)}${badge(it)}</span></a></li>`).join('')}</ul>
+        </div>`);
+    });
+  }
+
+  /* 7 · In den Themen (groß): the topic photo becomes a video preview */
+  function topicsBig() {
+    document.querySelectorAll('.topic[data-topic]').forEach(card => {
+      const [it] = topicItems(card.dataset.topic, 1);
+      if (!it) return;
+      card.classList.add('rx-topic-big');
+      const img = card.querySelector(':scope > img');
+      const box = document.createElement('a');
+      box.className = 'rx-topic-video';
+      box.innerHTML = `${blurPoster(it)}${it.type === 'post' ? '' : '<span class="rx-play rx-play--center" aria-hidden="true"></span>'}${badge(it)}
+        <span class="rx-tv-cap">${ig}<span><strong>${esc(it.title)}</strong><span>${it.type === 'post' ? 'Beitrag' : 'Video'} auf Instagram ansehen</span></span></span>`;
+      const attrs = tileAttrs(it).match(/(\S+?)="([^"]*)"/g);
+      attrs.forEach(a => { const [, k, v] = a.match(/(\S+?)="([^"]*)"/); box.setAttribute(k, v.replace(/&amp;/g, '&')); });
+      img ? img.replaceWith(box) : card.prepend(box);
+    });
+  }
+
+  /* 8 · Handy im Einstieg: the hero photo becomes a phone playing through the videos */
+  function heroPhone() {
+    const fig = document.querySelector('.hero-photo');
+    if (!fig) return;
+    fig.classList.add('rx-hero');
+    fig.innerHTML = `
+      <div class="rx-hero-photo"><img src="assets/fotos/laura-garten-gehend.jpg" alt="Laura Matthes im Garten"></div>
+      <div class="rx-phone rx-phone--hero"><div class="rx-screen"></div></div>
+      <div class="rx-hero-tag">${ig}<span><strong>Neu auf Instagram</strong>@lauramatthes</span></div>
+      <div class="rx-hero-dots" role="group" aria-label="Video wählen">${items.slice(0, 6).map((_, i) => `<button type="button" data-i="${i}" aria-label="Video ${i + 1}"></button>`).join('')}</div>`;
+    const dots = [...fig.querySelectorAll('.rx-hero-dots button')];
+    const phone = phoneScreen(fig.querySelector('.rx-screen'), i => dots.forEach((d, j) => d.setAttribute('aria-current', String(j === i))));
+    let timer;
+    const cycle = () => { clearInterval(timer); timer = setInterval(() => phone.show((phone.cur + 1) % Math.min(items.length, 6)), 5000); };
+    dots.forEach(d => d.onclick = () => { phone.show(Number(d.dataset.i)); cycle(); });
+    fig.addEventListener('mouseenter', () => clearInterval(timer));
+    fig.addEventListener('mouseleave', cycle);
+    phone.show(0);
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) cycle();
+  }
+
+  /* 9 · Instagram zuerst: the whole Instagram section moves up, right below the hero */
+  function moveSectionUp() {
+    const section = document.getElementById('reels');
+    const hero = document.querySelector('.hero');
+    if (section && hero) hero.after(section);
+    section.classList.add('rx-first');
+    const h2 = section.querySelector('.reels-head h2');
+    if (h2) h2.textContent = 'Neu von Laura auf Instagram';
+  }
+
   // Lightbox for self-hosted videos (only used once items carry a `video` URL)
-  app.addEventListener('click', e => {
+  document.addEventListener('click', e => {
     const a = e.target.closest('[data-play]');
     if (!a) return;
     e.preventDefault();
-    const it = items[Number(a.dataset.play)];
+    const it = REG[Number(a.dataset.play)];
     const dlg = document.createElement('div');
     dlg.className = 'rx-viewer';
     dlg.setAttribute('role', 'dialog'); dlg.setAttribute('aria-modal', 'true'); dlg.setAttribute('aria-label', it.title);
@@ -249,17 +346,27 @@
   });
 
   app.dataset.layout = layout;
-  LAYOUTS[layout].render();
+  LAYOUTS[layout].section();
+  (LAYOUTS[layout].extras || []).forEach(fn => fn());
 
-  // Draft switcher: only shown when a layout was picked via the URL
+  // Draft switcher: full bar when a layout was picked via the URL, otherwise a small pill
+  if (!DRAFT || window.self !== window.top) return; // no bar inside the overview thumbnails
+  const overview = new URL('varianten/index.html', document.baseURI).href;
+  const bar = document.createElement('nav');
+  bar.setAttribute('aria-label', 'Entwürfe');
   if (params.has('reels')) {
-    const bar = document.createElement('nav');
+    const link = (n, d) => { const p = new URLSearchParams(location.search); p.set('reels', n); d ? p.set('demo', d) : p.delete('demo'); return `?${p}${n == 8 ? '' : n >= 6 && n <= 7 ? '#themen' : '#reels'}`; };
+    const prev = layout === 1 ? 9 : layout - 1, next = layout === 9 ? 1 : layout + 1;
     bar.className = 'rx-switch';
-    bar.setAttribute('aria-label', 'Instagram-Varianten');
-    const link = (n, d) => { const p = new URLSearchParams(location.search); p.set('reels', n); d ? p.set('demo', d) : p.delete('demo'); return `?${p}#reels`; };
-    bar.innerHTML = `<span>Instagram-Variante</span>
-      ${Object.entries(LAYOUTS).map(([n, l]) => `<a href="${link(n, demoCount)}" ${Number(n) === layout ? 'aria-current="true"' : ''} title="${l.name}">${n}<em>${l.name}</em></a>`).join('')}
-      <a class="rx-demo" href="${link(layout, demoCount ? 0 : 12)}">${demoCount ? 'Nur echte Videos' : 'Mit 12 Videos ansehen'}</a>`;
-    document.body.appendChild(bar);
+    bar.innerHTML = `
+      <a class="rx-sw-all" href="${overview}" title="Alle Entwürfe">▦ Alle</a>
+      <a href="${link(prev, demoCount)}" aria-label="Vorherige Variante">←</a>
+      <span class="rx-sw-cur"><small>Instagram ${layout} von 9</small>${LAYOUTS[layout].name}</span>
+      <a href="${link(next, demoCount)}" aria-label="Nächste Variante">→</a>
+      <a class="rx-demo" href="${link(layout, demoCount ? 0 : 12)}">${demoCount ? 'Nur echte Videos' : 'Mit 12 Videos'}</a>`;
+  } else {
+    bar.className = 'rx-pill';
+    bar.innerHTML = `<a href="${overview}">▦ Entwürfe &amp; Varianten</a>`;
   }
+  document.body.appendChild(bar);
 })();

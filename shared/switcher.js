@@ -52,7 +52,8 @@
       <a class="nav" href="${href(prev)}" title="${prev.name}" aria-label="Vorheriges Backup">←</a>
       <div class="label"><small>Backup ${idx + 1} von ${VARIANTS.length}</small><strong>${cur.name}</strong></div>
       <a class="nav" href="${href(next)}" title="${next.name}" aria-label="Nächstes Backup">→</a>
-      <a class="main" href="../../index.html" title="Zur Hauptseite">Hauptseite</a>
+      <a class="main" href="../index.html" title="Alle Entwürfe">▦ Alle</a>
+      <a class="nav" href="../../index.html" title="Zur Hauptseite">Hauptseite</a>
       <button class="toggle" aria-label="Umschalter ein- oder ausklappen">${collapsed ? '‹›' : '×'}</button>
     </div>`;
 
