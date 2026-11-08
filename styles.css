@@ -194,7 +194,8 @@ p { margin: 0 0 1em; }
 /* ---------- Hero ---------- */
 .hero { padding: clamp(32px, 6vw, 80px) 0 clamp(48px, 7vw, 96px); overflow: hidden; }
 .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(32px, 6vw, 80px); align-items: center; }
-.hero h1 { color: var(--heading); }
+.hero h1 { color: var(--heading); font-size: clamp(2.4rem, 5.2vw, 3.9rem); }
+.hero .lead { font-size: clamp(1rem, 1.3vw, 1.08rem); margin-bottom: .8em; }
 .hero h1 span { color: var(--accent-text); }
 /* Gold is too light for text on white, so Mering highlights with a gold band instead */
 [data-theme="mering"] .hero h1 span { color: var(--heading); background: linear-gradient(transparent 64%, var(--accent) 64%, var(--accent) 92%, transparent 92%); -webkit-box-decoration-break: clone; box-decoration-break: clone; }
@@ -269,6 +270,15 @@ p { margin: 0 0 1em; }
 .quote { margin: 1.6em 0; padding: 0 0 0 1.2em; border-left: 3px solid var(--accent); }
 .quote p { font-family: var(--serif); font-size: 1.45rem; line-height: 1.35; color: var(--heading); margin: 0; }
 @media (max-width: 860px) { .about-grid { grid-template-columns: 1fr; } }
+
+/* Über mich: Lebensabschnitte */
+.chapters { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px 24px; margin-top: clamp(40px, 6vw, 72px); }
+.chapter { background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--accent); border-radius: var(--radius); padding: 26px 28px 24px; }
+.chapter-no { display: block; font-family: var(--serif); font-size: 1.05rem; color: var(--accent-text); margin-bottom: .4rem; }
+.chapter h3 { color: var(--heading); }
+.chapter p { color: var(--ink-soft); font-size: .98rem; }
+.chapter p:last-child { margin-bottom: 0; }
+@media (max-width: 760px) { .chapters { grid-template-columns: 1fr; } }
 
 /* Topics */
 .topics { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }

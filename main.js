@@ -21,7 +21,7 @@ window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
 
 // Fade sections in on scroll
-const revealables = document.querySelectorAll('.section-head, .topic, .expect-col, .about-grid > *');
+const revealables = document.querySelectorAll('.section-head, .topic, .expect-col, .about-grid > *, .chapter');
 if ('IntersectionObserver' in window) {
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
