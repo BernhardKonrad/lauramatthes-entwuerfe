@@ -1,9 +1,9 @@
-// Colour themes: standard (navy/magenta), dark, mering (gold/silver/black).
+// Colour themes: standard (petrol/teal), dark, mering (gold/silver/black).
 // Loaded in <head> so the stored theme applies before the first paint.
 (() => {
   const KEY = 'lm-theme';
   const THEMES = ['standard', 'dark', 'mering'];
-  const META = { standard: '#0b1f44', dark: '#0d121d', mering: '#1b1b1b' };
+  const META = { standard: '#083335', dark: '#071a1c', mering: '#1b1b1b' };
   const root = document.documentElement;
 
   let stored = null;

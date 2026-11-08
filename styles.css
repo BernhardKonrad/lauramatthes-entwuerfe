@@ -1,28 +1,29 @@
 /* ---------- Tokens ---------- */
-/* Standard: Navy + Magenta aus dem Flyer */
+/* Standard: Petrol + Türkis auf Hellgrau aus dem neuen Flyer-/Plakatentwurf, Magenta nur fürs Wahlkreuz */
 :root {
-  --primary: #0b1f44;        /* dunkle Flächen: Fakten, Kontakt, „Sie dürfen erwarten“ */
+  --primary: #083335;        /* Petrol (Namensbalken): dunkle Flächen wie Fakten, Kontakt, „Sie dürfen erwarten“ */
   --on-primary: #ffffff;
-  --heading: #0b1f44;        /* Überschriften auf hellem Grund */
-  --ink: #18202e;
-  --ink-soft: #4a5263;
-  --accent: #c2007a;         /* Magenta als Fläche */
-  --accent-dark: #9b0062;
-  --on-accent: #ffffff;
-  --accent-text: #c2007a;    /* Magenta als Schrift auf hellem Grund */
-  --accent-on-dark: #ff9ad5; /* Akzentschrift auf dunklen Flächen */
-  --btn-bg: #0b1f44;
-  --btn-hover: #16305e;
+  --heading: #083335;        /* Überschriften auf hellem Grund */
+  --ink: #1a2326;
+  --ink-soft: #4a575b;
+  --accent: #1cabb0;         /* Türkis (Slogan-Balken) als Fläche */
+  --accent-dark: #148e93;
+  --on-accent: #062628;      /* Schrift auf Türkis: Petrol, weil Weiß zu wenig Kontrast hätte */
+  --accent-text: #0a6b70;    /* Türkis abgedunkelt für Schrift auf Hellgrau */
+  --accent-on-dark: #6fd8dc; /* Türkis aufgehellt für Schrift auf Petrol */
+  --vote: #bd0071;           /* Magenta, nur für das Wahlkreuz */
+  --btn-bg: #083335;
+  --btn-hover: #0f4a4d;
   --btn-fg: #ffffff;
-  --paper: #fcfcfb;
+  --paper: #e7e9ec;          /* Hellgrau des Flyer-Hintergrunds */
   --surface: #ffffff;
-  --sand: #f1efeb;
-  --sand-2: #e3e0da;
-  --line: #d9d5ce;
-  --header-bg: rgba(252, 252, 251, .92);
-  --footer-bg: #07142e;
-  --ph-bg: rgba(194, 0, 122, .1);
-  --shadow: rgba(11, 31, 68, .14);
+  --sand: #dde1e5;
+  --sand-2: #c9d0d5;
+  --line: #c9d0d5;
+  --header-bg: rgba(231, 233, 236, .92);
+  --footer-bg: #052224;
+  --ph-bg: rgba(28, 171, 176, .16);
+  --shadow: rgba(8, 51, 53, .16);
   color-scheme: light;
 
   --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
@@ -36,27 +37,28 @@
 
 /* Dunkel */
 :root[data-theme="dark"] {
-  --primary: #18264a;
-  --on-primary: #f2f4f8;
-  --heading: #f2f4f8;
-  --ink: #e4e7ee;
-  --ink-soft: #a9b1c3;
-  --accent: #d81b8c;
-  --accent-dark: #b0126f;
-  --on-accent: #ffffff;
-  --accent-text: #ff7cc6;
-  --accent-on-dark: #ff9ad5;
-  --btn-bg: #f2f4f8;
+  --primary: #0e3b3e;
+  --on-primary: #eef4f4;
+  --heading: #eef4f4;
+  --ink: #e1e8e9;
+  --ink-soft: #a3b4b6;
+  --accent: #1cabb0;
+  --accent-dark: #148e93;
+  --on-accent: #062628;
+  --accent-text: #6fd8dc;
+  --accent-on-dark: #8fe3e6;
+  --vote: #ff4fae;
+  --btn-bg: #eef4f4;
   --btn-hover: #ffffff;
-  --btn-fg: #0b1220;
-  --paper: #0d121d;
-  --surface: #161d2c;
-  --sand: #121929;
-  --sand-2: #253049;
-  --line: #2a3450;
-  --header-bg: rgba(13, 18, 29, .9);
-  --footer-bg: #080b13;
-  --ph-bg: rgba(255, 124, 198, .14);
+  --btn-fg: #062628;
+  --paper: #071a1c;
+  --surface: #0f2a2d;
+  --sand: #0b2124;
+  --sand-2: #1d4144;
+  --line: #22474a;
+  --header-bg: rgba(7, 26, 28, .9);
+  --footer-bg: #041113;
+  --ph-bg: rgba(111, 216, 220, .14);
   --shadow: rgba(0, 0, 0, .45);
   color-scheme: dark;
 }
@@ -163,8 +165,8 @@ p { margin: 0 0 1em; }
 .theme-picker button { width: 30px; height: 30px; padding: 0; border: 0; border-radius: 50%; background: transparent; cursor: pointer; display: grid; place-items: center; }
 .theme-picker button[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--heading); }
 .theme-picker .sw { width: 20px; height: 20px; border-radius: 50%; display: block; box-shadow: inset 0 0 0 1px rgba(127,127,127,.35); }
-.sw-standard { background: linear-gradient(135deg, #0b1f44 50%, #c2007a 50%); }
-.sw-dark { background: linear-gradient(135deg, #0d121d 50%, #ff7cc6 50%); }
+.sw-standard { background: linear-gradient(135deg, #083335 50%, #1cabb0 50%); }
+.sw-dark { background: linear-gradient(135deg, #071a1c 50%, #6fd8dc 50%); }
 .sw-mering { background: linear-gradient(135deg, #d6a82a 0 33%, #e6e6e6 33% 66%, #1b1b1b 66%); }
 
 @media (max-width: 760px) {
@@ -197,9 +199,11 @@ p { margin: 0 0 1em; }
 .hero h1 { color: var(--heading); font-size: clamp(2.4rem, 5.2vw, 3.9rem); }
 .hero .lead { font-size: clamp(1rem, 1.3vw, 1.08rem); margin-bottom: .8em; }
 .hero h1 span { color: var(--accent-text); }
+/* Standard: slogan on a teal bar, like on the flyer and poster */
+:root:not([data-theme]) .hero h1 span { color: var(--on-accent); background: var(--accent); padding: 0 .18em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 /* Gold is too light for text on white, so Mering highlights with a gold band instead */
 [data-theme="mering"] .hero h1 span { color: var(--heading); background: linear-gradient(transparent 64%, var(--accent) 64%, var(--accent) 92%, transparent 92%); -webkit-box-decoration-break: clone; box-decoration-break: clone; }
-.eyebrow .x { display: inline-grid; place-items: center; width: 1.5em; height: 1.5em; border: 2px solid currentColor; border-radius: 50%; margin-right: .4em; font-size: .9em; }
+.eyebrow .x { color: var(--vote, currentColor); display: inline-grid; place-items: center; width: 1.5em; height: 1.5em; border: 2px solid currentColor; border-radius: 50%; margin-right: .4em; font-size: .9em; }
 /* height:auto overrides the width/height attributes so aspect-ratio decides the frame */
 .hero-photo img, .about-photo img { width: 100%; height: auto; border-radius: var(--radius); object-fit: cover; }
 .hero-photo img { aspect-ratio: 4 / 5; object-position: 40% 18%; max-height: 78vh; }
