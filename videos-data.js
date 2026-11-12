@@ -6,7 +6,7 @@
 //            Ist er gesetzt, läuft das Video direkt auf der Seite; sonst öffnet
 //            ein Klick den Beitrag in einem neuen Tab.
 //   duration optional: Länge, z. B. '0:42'
-//   topic    optional: verwaltung | wirtschaft | familien | zukunft | persoenlich | nachwahl
+//   topic    optional: verwaltung | wirtschaft | familien | zukunft | persoenlich | neuwahl
 window.LM_VIDEOS = [
   {
     title: 'News aus Mering',
