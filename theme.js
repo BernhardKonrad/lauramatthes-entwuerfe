@@ -1,4 +1,4 @@
-// Colour concept (?farbe=1..10, default 1 "Flyer") plus the header themes
+// Colour concept (?farbe=1..13, default 1 "Flyer"; 11–13 use the Greens' corporate design) plus the header themes
 // standard / dark / mering. Loaded in <head> so colours apply before the first paint.
 (() => {
   const KEY = 'lm-theme';
@@ -14,6 +14,9 @@
     { name: 'Nachtblau & Koralle', color: '#1d2b4f' },
     { name: 'Hell & Gold', color: '#2b2b2b' },
     { name: 'Minimal', color: '#14181c' },
+    { name: 'Grüne CI · Sand', color: '#005437' },
+    { name: 'Grüne CI · Tanne & Sonne', color: '#005437' },
+    { name: 'Grüne CI · Online', color: '#005437' },
   ];
   window.LM_CONCEPTS = CONCEPTS;
   const root = document.documentElement;

@@ -34,6 +34,9 @@
   .actions a { display: inline-block; text-decoration: none; font-weight: 600; font-size: .92rem; padding: 9px 16px; border-radius: 999px; background: #16202a; color: #fff; }
   .actions a:hover { background: var(--accent); }
 
+  .ci { border-top: 1px solid var(--line); margin-top: 10px; padding-top: 30px; }
+  .ci-title { font-size: clamp(1.4rem, 3vw, 2rem); margin: 0 0 .3em; }
+  .ci-lead { color: var(--soft); max-width: 52em; margin: 0 0 18px; }
   .notes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; color: var(--soft); font-size: .93rem; padding: 10px 0 50px; border-top: 1px solid var(--line); margin-top: 10px; }
   .notes h3 { color: var(--ink); font-size: 1rem; margin: 20px 0 .4em; }
   .notes ul { margin: 0; padding-left: 1.1em; }
@@ -53,12 +56,18 @@
 
   <main class="grid" id="grid"></main>
 
+  <section class="ci">
+    <h2 class="ci-title">Zum Vergleich: im Corporate Design der Grünen</h2>
+    <p class="ci-lead">Diese drei Varianten nutzen Farben und Schriften aus dem offiziellen Styleguide von BÜNDNIS 90/DIE GRÜNEN (2023): Tanne, Klee, Grashalm, Sand, Sonne und Himmel, Headlines in Großbuchstaben, Fließtext in PT Sans und den schräg gestellten Textbalken. So lässt sich gut vergleichen, wie viel „Partei“ die Seite ausstrahlen soll.</p>
+    <div class="grid" id="grid-ci"></div>
+  </section>
+
   <div class="notes">
     <div>
       <h3>Was überall gleich bleibt</h3>
       <ul>
         <li>Inhalt, Fotos und Aufbau der Seite</li>
-        <li>Das Wahlkreuz in Magenta</li>
+        <li>Das Wahlkreuz in Magenta (bei den Grünen-CI-Varianten in Klee)</li>
         <li>Alle Konzepte erfüllen die Kontrastregeln für gute Lesbarkeit</li>
       </ul>
     </div>
@@ -95,16 +104,23 @@
     ['Hell & Gold', 'Creme, Schwarz und das Gold aus dem Mering-Wappen.', ['#faf8f3', '#2b2b2b', '#c9a227']],
     ['Minimal', 'Weiß, Schwarz und ein einziger Akzent – fast ohne dunkle Flächen.', ['#ffffff', '#14181c', '#0a6b70']],
   ];
-  document.getElementById('grid').innerHTML = CONCEPTS.map(([name, desc, sw], i) => {
-    const href = `../index.html?farbe=${i + 1}`;
+  const CI = [
+    ['Grüne CI · Sand', 'Sand-Hintergrund, Tanne und Klee. Der Slogan steht auf einem schrägen Textbalken in Tanne.', ['#f5f1e9', '#005437', '#008939']],
+    ['Grüne CI · Tanne & Sonne', 'Weiß und Sand, Slogan auf Sonne-Gelb, Faktenleiste in Grashalm – am plakativsten.', ['#ffffff', '#005437', '#fff17a']],
+    ['Grüne CI · Online', 'Sand, Himmel und Grashalm wie in den Social-Media-Vorlagen des Styleguides.', ['#f5f1e9', '#0ba1dd', '#8abd24']],
+  ];
+  const card = ([name, desc, sw], n) => {
+    const href = `../index.html?farbe=${n}`;
     return `<div class="card">
       <a class="thumb" href="${href}" tabindex="-1" aria-hidden="true"><iframe src="${href}" loading="lazy" tabindex="-1" title=""></iframe></a>
-      <div class="meta"><span class="num">FARBKONZEPT ${i + 1}</span><h2>${name}</h2>
+      <div class="meta"><span class="num">FARBKONZEPT ${n}</span><h2>${name}</h2>
         <div class="swatches" aria-hidden="true">${sw.map(c => `<span style="background:${c}"></span>`).join('')}</div>
         <p>${desc}</p>
         <div class="actions"><a href="${href}">Ansehen</a></div></div>
     </div>`;
-  }).join('');
+  };
+  document.getElementById('grid').innerHTML = CONCEPTS.map((c, i) => card(c, i + 1)).join('');
+  document.getElementById('grid-ci').innerHTML = CI.map((c, i) => card(c, i + 11)).join('');
   const fit = () => document.querySelectorAll('.thumb').forEach(t => { t.querySelector('iframe').style.transform = `scale(${t.clientWidth / 1280})`; });
   addEventListener('resize', fit); fit();
 </script>
