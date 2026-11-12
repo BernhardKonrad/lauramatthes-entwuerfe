@@ -1,15 +1,33 @@
-// Colour themes: standard (petrol/teal), dark, mering (gold/silver/black).
-// Loaded in <head> so the stored theme applies before the first paint.
+// Colour concept (?farbe=1..10, default 1 "Flyer") plus the header themes
+// standard / dark / mering. Loaded in <head> so colours apply before the first paint.
 (() => {
   const KEY = 'lm-theme';
   const THEMES = ['standard', 'dark', 'mering'];
-  const META = { standard: '#083335', dark: '#071a1c', mering: '#1b1b1b' };
+  const CONCEPTS = [
+    { name: 'Flyer', color: '#083335' },
+    { name: 'Weiß & Petrol', color: '#083335' },
+    { name: 'Navy & Türkis', color: '#001b3d' },
+    { name: 'Schiefer & Kupfer', color: '#2e3a44' },
+    { name: 'Ozeanblau', color: '#0f3d5e' },
+    { name: 'Graphit & Magenta', color: '#2a2c33' },
+    { name: 'Sand & Petrol', color: '#0e4245' },
+    { name: 'Nachtblau & Koralle', color: '#1d2b4f' },
+    { name: 'Hell & Gold', color: '#2b2b2b' },
+    { name: 'Minimal', color: '#14181c' },
+  ];
+  window.LM_CONCEPTS = CONCEPTS;
   const root = document.documentElement;
 
+  const param = Number(new URLSearchParams(location.search).get('farbe'));
+  const concept = param >= 1 && param <= CONCEPTS.length ? param : 1;
+  window.LM_CONCEPT = concept;
+  if (concept > 1) root.setAttribute('data-concept', String(concept));
+
+  // Previewing a colour concept always starts in its light standard look.
   let stored = null;
   try { stored = localStorage.getItem(KEY); } catch {}
-  const prefersDark = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches;
-  const initial = THEMES.includes(stored) ? stored : (prefersDark ? 'dark' : 'standard');
+  const initial = !param && THEMES.includes(stored) ? stored : 'standard';
+  const META = { standard: CONCEPTS[concept - 1].color, dark: '#071a1c', mering: '#1b1b1b' };
 
   function apply(theme, save) {
     // switch colours instantly instead of letting hover transitions fade them
