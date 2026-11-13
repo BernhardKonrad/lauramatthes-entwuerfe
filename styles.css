@@ -39,6 +39,7 @@
   color-scheme: light;
 
   --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --head: "GrueneTypeNeue", var(--serif);   /* Überschriften; ohne Schriftdatei greift die Serifenschrift */
   --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
   --radius: 14px;
@@ -148,9 +149,13 @@
 @font-face { font-family: "PT Sans"; src: url(assets/fonts/pt-sans-bold.woff2) format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
 @font-face { font-family: "PT Sans Narrow"; src: url(assets/fonts/pt-sans-narrow-bold.woff2) format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
 @font-face { font-family: "GrueneType"; src: local("GrueneType"), local("GrueneType Bold"); font-weight: 400 900; font-display: swap; }
+/* Überschriften-Schrift der Grünen. Die Datei gibt es nur im Markenportal; liegt sie als
+   assets/fonts/GrueneTypeNeue.woff2 vor, hier die url(...)-Quelle ergänzen. */
+@font-face { font-family: "GrueneTypeNeue"; src: local("GrueneTypeNeue"), local("GrueneType Neue"), local("GrueneTypeNeue Bold"); font-weight: 400 900; font-display: swap; }
 
 :root:is([data-concept="11"], [data-concept="12"], [data-concept="13"]) {
-  --serif: "GrueneType", "PT Sans Narrow", "Arial Narrow", sans-serif;
+  --head: "GrueneTypeNeue", "GrueneType", "PT Sans Narrow", "Arial Narrow", sans-serif;
+  --serif: "PT Sans", system-ui, sans-serif;
   --sans: "PT Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --head-case: uppercase;
   --primary: #005437; --heading: #005437; --ink: #1c2a22; --ink-soft: #4d5b52;
@@ -261,7 +266,7 @@ body {
 }
 img { max-width: 100%; display: block; }
 a { color: inherit; }
-h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.12; margin: 0 0 .5em; letter-spacing: -.01em; }
+h1, h2, h3 { font-family: var(--head); font-weight: 600; line-height: 1.12; margin: 0 0 .5em; letter-spacing: -.01em; }
 h1, h2 { text-transform: var(--head-case, none); }
 h1 { font-size: clamp(2.6rem, 6.5vw, 4.6rem); }
 h2 { font-size: clamp(1.8rem, 3.8vw, 2.7rem); }
@@ -308,7 +313,7 @@ p { margin: 0 0 1em; }
 .site-header.scrolled { border-bottom-color: var(--line); }
 .header-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
 .brand { text-decoration: none; display: flex; flex-direction: column; line-height: 1.1; }
-.brand-name { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; color: var(--heading); margin: 0; }
+.brand-name { font-family: var(--head); font-size: 1.35rem; font-weight: 600; color: var(--heading); margin: 0; }
 .brand-tag { font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-text); font-weight: 700; }
 
 .nav { display: flex; align-items: center; gap: 2rem; }

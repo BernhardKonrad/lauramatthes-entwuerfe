@@ -8,7 +8,7 @@
   const PAGE = 8;
   const TOPICS = {
     verwaltung: 'Verwaltung', wirtschaft: 'Wirtschaft', familien: 'Familien',
-    zukunft: 'Zukunft', persoenlich: 'Persönlich', neuwahl: 'Neuwahl',
+    zukunft: 'Zukunft', persoenlich: 'Persönlich', nachwahl: 'Nachwahl',
   };
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
   const kind = it => it.type === 'bild' ? 'Bildbeitrag' : 'Video';
