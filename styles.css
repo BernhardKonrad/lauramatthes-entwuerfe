@@ -269,7 +269,7 @@ a { color: inherit; }
 h1, h2, h3 { font-family: var(--head); font-weight: 600; line-height: 1.12; margin: 0 0 .5em; letter-spacing: -.01em; }
 h1, h2 { text-transform: var(--head-case, none); }
 /* GrueneTypeNeue is already slanted; a synthetic italic on top pushes letters into the next word space */
-:is(h1, h2, h3) :is(em, i) { font-style: normal; }
+:is(h1, h2, h3, th) :is(em, i) { font-style: normal; }
 h1 { font-size: clamp(2.6rem, 6.5vw, 4.6rem); }
 h2 { font-size: clamp(1.8rem, 3.8vw, 2.7rem); }
 h3 { font-size: 1.35rem; }
@@ -379,21 +379,37 @@ p { margin: 0 0 1em; }
 .about-photo img { aspect-ratio: 4 / 3; object-position: 25% 30%; }
 
 /* Expectations */
-.expect { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.expect-col { border-radius: var(--radius); padding: 28px; }
-.expect-col h3 { font-size: 1.4rem; }
-.expect-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
-.expect-col li { position: relative; padding-left: 2em; line-height: 1.45; }
-.expect-col li::before { position: absolute; left: 0; top: -.05em; font-weight: 700; width: 1.4em; height: 1.4em; border-radius: 50%; display: grid; place-items: center; font-size: .85em; }
-.expect-yes { background: var(--expect-bg); color: var(--expect-fg); }
-.expect-yes h3 { color: var(--expect-fg); }
-.expect-yes li::before { content: "✓"; background: var(--expect-fg); color: var(--expect-bg); }
-.expect-no { background: var(--surface); border: 1px solid var(--line); }
-.expect-no h3 { color: var(--heading); }
-.expect-no h3 em { color: var(--accent-text); }
-.expect-no li { color: var(--ink-soft); }
-.expect-no li::before { content: "✕"; background: var(--accent); color: var(--on-accent); }
-@media (max-width: 760px) { .expect { grid-template-columns: 1fr; } }
+/* Expectations: each "may expect" sits in one row with the "may not expect" it belongs to */
+.pairs { width: 100%; table-layout: fixed; border-collapse: separate; border-spacing: 0; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.pairs th, .pairs td { text-align: left; vertical-align: middle; line-height: 1.45; }
+.pairs th { font-family: var(--head); font-weight: 600; font-size: 1.35rem; padding: 22px 28px 16px; }
+.pairs td { position: relative; padding: 16px 28px 16px 60px; }
+.pairs .pair-yes { background: var(--expect-bg); color: var(--expect-fg); }
+.pairs .pair-no { background: var(--surface); color: var(--ink-soft); }
+.pairs th.pair-no { color: var(--heading); }
+.pairs th.pair-no em { color: var(--accent-text); }
+.pairs tbody tr td { border-top: 1px solid var(--line); }
+.pairs tbody tr td.pair-yes { border-top-color: color-mix(in srgb, var(--expect-fg) 18%, transparent); }
+.pairs td::before { position: absolute; left: 22px; top: 50%; transform: translateY(-50%); width: 1.5em; height: 1.5em; border-radius: 50%; display: grid; place-items: center; font-size: .8em; font-weight: 700; }
+.pairs td.pair-yes::before { content: "✓"; background: var(--expect-fg); color: var(--expect-bg); }
+.pairs td.pair-no::before { content: "✕"; background: var(--accent); color: var(--on-accent); }
+/* small pointer joining both halves of a pair */
+.pairs td.pair-yes::after { content: ""; position: absolute; right: -8px; top: 50%; width: 16px; height: 16px; background: var(--expect-bg); transform: translateY(-50%) rotate(45deg); z-index: 1; }
+.pairs tbody tr:hover td.pair-no { background: var(--sand); color: var(--ink); }
+.pair-k { display: none; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+@media (max-width: 760px) {
+  .pairs, .pairs tbody, .pairs tr, .pairs td { display: block; width: 100%; }
+  .pairs { border: 0; border-radius: 0; overflow: visible; }
+  .pairs thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .pairs tbody { display: grid; gap: 14px; }
+  .pairs tr { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); }
+  .pairs tbody tr td { border-top: 0; padding: 14px 18px 14px 54px; }
+  .pairs td::before { top: 36px; transform: none; left: 18px; }
+  .pairs td.pair-yes::after { right: auto; left: 26px; top: auto; bottom: -8px; transform: rotate(45deg); }
+  .pair-k { display: block; font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 4px; opacity: .8; }
+  .pairs td.pair-no .pair-k { color: var(--accent-text); opacity: 1; }
+}
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 2rem; }
 .hero-photo { margin: 0; position: relative; isolation: isolate; }
 .hero-photo::before {
