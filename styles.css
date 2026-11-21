@@ -6,7 +6,7 @@
   --on-primary: #ffffff;
   --heading: #083335;        /* Überschriften auf hellem Grund */
   --ink: #1a2326;
-  --ink-soft: #4a575b;
+  --ink-soft: #323d40;
   --accent: #1cabb0;         /* Akzent als Fläche */
   --accent-dark: #148e93;
   --on-accent: #062628;      /* Schrift auf der Akzentfläche */
@@ -57,7 +57,7 @@
 
 /* 3 · Navy & Türkis: Navy der Flyer-Beschriftungen, Türkis als Akzent */
 :root[data-concept="3"] {
-  --primary: #001b3d; --heading: #001b3d; --ink: #18202e; --ink-soft: #4a5263;
+  --primary: #001b3d; --heading: #001b3d; --ink: #18202e; --ink-soft: #313948;
   --on-accent: #001b3d; --btn-bg: #001b3d; --btn-hover: #0c2e5c;
   --paper: #f3f5f8; --sand: #e8ecf2; --sand-2: #d3dae4; --line: #d3dae4;
   --header-bg: rgba(243, 245, 248, .92); --footer-bg: #00122a; --shadow: rgba(0, 27, 61, .14);
@@ -67,7 +67,7 @@
 
 /* 4 · Schiefer & Kupfer: warmes Grau, gedeckter Kupferton */
 :root[data-concept="4"] {
-  --primary: #2e3a44; --heading: #26313a; --ink: #23282d; --ink-soft: #555c63;
+  --primary: #2e3a44; --heading: #26313a; --ink: #23282d; --ink-soft: #3c4248;
   --accent: #a85a33; --accent-dark: #8f4b2a; --on-accent: #ffffff; --accent-text: #94502d; --accent-on-dark: #f0b48f;
   --btn-bg: #2e3a44; --btn-hover: #3d4b57;
   --paper: #f4f2ef; --sand: #ebe7e1; --sand-2: #d9d3ca; --line: #d9d3ca;
@@ -78,7 +78,7 @@
 
 /* 5 · Ozeanblau: klares Blau, sehr helles Blaugrau */
 :root[data-concept="5"] {
-  --primary: #0f3d5e; --heading: #0f3d5e; --ink: #1a2733; --ink-soft: #4b5b69;
+  --primary: #0f3d5e; --heading: #0f3d5e; --ink: #1a2733; --ink-soft: #32414e;
   --accent: #1f77b4; --accent-dark: #18649a; --on-accent: #ffffff; --accent-text: #1a65a0; --accent-on-dark: #8cc8f0;
   --btn-bg: #0f3d5e; --btn-hover: #174f78;
   --paper: #f2f6fa; --sand: #e5edf5; --sand-2: #ccdbe9; --line: #d0dce8;
@@ -88,7 +88,7 @@
 
 /* 6 · Graphit & Magenta: Weiß, Anthrazit, Magenta aus dem Wahlkreuz */
 :root[data-concept="6"] {
-  --primary: #2a2c33; --heading: #1f2127; --ink: #23252b; --ink-soft: #555862;
+  --primary: #2a2c33; --heading: #1f2127; --ink: #23252b; --ink-soft: #3c3e46;
   --accent: #bd0071; --accent-dark: #9a005c; --on-accent: #ffffff; --accent-text: #b0006a; --accent-on-dark: #ff8fcf;
   --btn-bg: #1f2127; --btn-hover: #373a43;
   --paper: #ffffff; --band: #f7f7f9; --sand: #f3f3f5; --sand-2: #e1e1e6; --line: #e1e1e6;
@@ -99,7 +99,7 @@
 
 /* 7 · Sand & Petrol: warmer Sandton, Petrol und Türkis */
 :root[data-concept="7"] {
-  --primary: #0e4245; --heading: #0e4245; --ink: #2a2622; --ink-soft: #5f5850;
+  --primary: #0e4245; --heading: #0e4245; --ink: #2a2622; --ink-soft: #443f39;
   --accent-on-dark: #7fdde0; --btn-bg: #0e4245; --btn-hover: #155a5e;
   --paper: #f6f1ea; --surface: #fffdf9; --band: #fffdf9; --sand: #ede5da; --sand-2: #ddd2c3; --line: #e0d6c8;
   --header-bg: rgba(246, 241, 234, .92); --footer-bg: #0a2f31; --shadow: rgba(60, 45, 30, .12);
@@ -108,7 +108,7 @@
 
 /* 8 · Nachtblau & Koralle */
 :root[data-concept="8"] {
-  --primary: #1d2b4f; --heading: #1d2b4f; --ink: #1e2433; --ink-soft: #535a6b;
+  --primary: #1d2b4f; --heading: #1d2b4f; --ink: #1e2433; --ink-soft: #383f4f;
   --accent: #c84a33; --accent-dark: #a93c28; --on-accent: #ffffff; --accent-text: #b4412c; --accent-on-dark: #ffab98;
   --btn-bg: #1d2b4f; --btn-hover: #2b3d6b;
   --paper: #f5f6f8; --sand: #eaecf0; --sand-2: #d6dae2; --line: #d9dde4;
@@ -119,7 +119,7 @@
 
 /* 9 · Hell & Gold: Mering-Gold auf Creme, ohne dunkle Wappenfläche */
 :root[data-concept="9"] {
-  --primary: #2b2b2b; --heading: #1e1e1e; --ink: #222222; --ink-soft: #5a564c;
+  --primary: #2b2b2b; --heading: #1e1e1e; --ink: #222222; --ink-soft: #3e3c37;
   --accent: #c9a227; --accent-dark: #ad8a1c; --on-accent: #1e1e1e; --accent-text: #7a5d00; --accent-on-dark: #e6c66a;
   --btn-bg: #1e1e1e; --btn-hover: #3a3a3a;
   --paper: #faf8f3; --sand: #f2ede1; --sand-2: #e2d9c3; --line: #e4dccb;
@@ -129,7 +129,7 @@
 
 /* 10 · Minimal: Weiß, Schwarz, ein Akzent – keine dunklen Flächen außer dem Footer */
 :root[data-concept="10"] {
-  --primary: #14181c; --heading: #14181c; --ink: #1c2024; --ink-soft: #5b6168;
+  --primary: #14181c; --heading: #14181c; --ink: #1c2024; --ink-soft: #3c4046;
   --accent: #0a6b70; --accent-dark: #08585c; --on-accent: #ffffff; --accent-text: #0a6b70; --accent-on-dark: #7fdde0;
   --btn-bg: #14181c; --btn-hover: #2c3238;
   --paper: #ffffff; --band: #fafbfb; --sand: #f5f6f7; --sand-2: #e4e7ea; --line: #e4e7ea;
@@ -158,7 +158,7 @@
   --serif: "PT Sans", system-ui, sans-serif;
   --sans: "PT Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --head-case: uppercase;
-  --primary: #005437; --heading: #005437; --ink: #1c2a22; --ink-soft: #4d5b52;
+  --primary: #005437; --heading: #005437; --ink: #1c2a22; --ink-soft: #34423a;
   --vote: #008939; --btn-bg: #005437; --btn-hover: #006b46;
   --footer-bg: #003d28; --shadow: rgba(0, 84, 55, .14);
   --facts-bg: #005437; --facts-fg: #ffffff; --facts-key: #fff17a; --facts-line: rgba(255, 255, 255, .16);
@@ -199,7 +199,7 @@
   --on-primary: #eef4f4;
   --heading: #eef4f4;
   --ink: #e1e8e9;
-  --ink-soft: #a3b4b6;
+  --ink-soft: #c2ced0;
   --accent: #1cabb0;
   --accent-dark: #148e93;
   --on-accent: #062628;
@@ -231,7 +231,7 @@
   --on-primary: #ffffff;
   --heading: #161616;
   --ink: #1d1d1b;
-  --ink-soft: #57544b;
+  --ink-soft: #3a3833;
   --accent: #d6a82a;
   --accent-dark: #b98f17;
   --on-accent: #161616;
@@ -385,7 +385,7 @@ p { margin: 0 0 1em; }
 .pairs th { font-family: var(--head); font-weight: 600; font-size: 1.35rem; padding: 22px 28px 16px; }
 .pairs td { position: relative; padding: 16px 28px 16px 60px; }
 .pairs .pair-yes { background: var(--expect-bg); color: var(--expect-fg); }
-.pairs .pair-no { background: var(--surface); color: var(--ink-soft); }
+.pairs .pair-no { background: var(--surface); color: var(--ink); }
 .pairs th.pair-no { color: var(--heading); }
 .pairs th.pair-no em { color: var(--accent-text); }
 .pairs tbody tr td { border-top: 1px solid var(--line); }
@@ -407,7 +407,7 @@ p { margin: 0 0 1em; }
   .pairs tbody tr td { border-top: 0; padding: 14px 18px 14px 54px; }
   .pairs td::before { top: 36px; transform: none; left: 18px; }
   .pairs td.pair-yes::after { right: auto; left: 26px; top: auto; bottom: -8px; transform: rotate(45deg); }
-  .pair-k { display: block; font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 4px; opacity: .8; }
+  .pair-k { display: block; font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 4px; }
   .pairs td.pair-no .pair-k { color: var(--accent-text); opacity: 1; }
 }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 2rem; }
