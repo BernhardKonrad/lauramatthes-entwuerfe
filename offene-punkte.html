@@ -61,6 +61,38 @@
     .op-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; }
     .op-head .btn { white-space: nowrap; }
     @media (max-width: 560px) { .op-head .brand-tag { display: none; } }
+    /* Herkunft: Laura (Text), Annette (Mensch), KI (Claude) */
+    :root { --ai: #5b3a9e; --ai-bg: #f3effb; --ai-line: #b9a6e0; }
+    .src { display: inline-flex; align-items: center; gap: 5px; font-size: .74rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; white-space: nowrap; vertical-align: .1em; }
+    .src svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2.4; }
+    .src-laura { background: var(--surface); color: var(--heading); border: 1px solid var(--line); }
+    .src-annette { background: #8a4b00; color: #fff; }
+    .src-ai { background: var(--ai); color: #fff; }
+
+    .op-legend { margin-top: 26px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 22px; max-width: 760px; }
+    .op-legend-title { margin: 0 0 10px; font-weight: 700; color: var(--heading); }
+    .op-legend ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+    .op-legend li { display: flex; gap: 12px; align-items: baseline; color: var(--ink); font-size: .95rem; }
+    .op-legend li .src { flex: none; min-width: 9.5em; justify-content: center; }
+
+    .op-human { margin: 0 0 28px; max-width: 640px; background: #fbf3e8; border-left: 4px solid #8a4b00; border-radius: 0 10px 10px 0; padding: 14px 18px; color: var(--ink); }
+    .op-human p { margin: 8px 0 0; font-size: 1.08rem; }
+    .op-human small { display: block; margin-top: 6px; color: var(--ink-soft); }
+    .op-context > .src { margin-bottom: 8px; }
+
+    .op-ai-block { background: var(--ai-bg); border: 2px dashed var(--ai-line); border-radius: calc(var(--radius) + 6px); padding: clamp(16px, 3vw, 28px); }
+    .op-ai-head { margin: 0 0 20px; color: var(--ink); max-width: 52em; }
+    .op-ai-head .src, .op-note .src, .op-ai-line .src { margin-right: 6px; }
+    .op-opt.ai { border-color: var(--ai-line); }
+    .op-opt.ai.rec { border: 2px solid var(--ai); }
+    .op-opt.ai .op-tag { color: var(--ai); }
+    .op-opt.ai blockquote { border-left-color: var(--ai-line); }
+    .op-opt.ai .op-rec { background: var(--ai); color: #fff; }
+    .op-rec--plain { background: var(--surface) !important; color: var(--heading) !important; border: 1px solid var(--line); }
+    .op-ai-block .op-note { margin-bottom: 0; color: var(--ink); }
+    .op-ai-line { margin: 0; color: var(--ink); font-size: .93rem; }
+    .op-opt p.op-ai-line { color: var(--ink); }
+    @media (max-width: 560px) { .op-legend li { flex-direction: column; gap: 4px; } }
   </style>
 </head>
 <body>
@@ -80,7 +112,17 @@
     <div class="wrap">
       <p class="eyebrow">Stand 22. November 2026</p>
       <h1>Offene Punkte</h1>
-      <p class="lead">Liebe Laura, Annettes Korrekturen aus „Homepage Laura Texte“ sind auf der Homepage eingearbeitet. Hier stehen nur noch die Stellen, die eine Entscheidung von dir brauchen – jeweils im Zusammenhang, so wie sie auf der Seite erscheinen, mit Vorschlägen zur Auswahl.</p>
+      <p class="lead">Liebe Laura, Annettes Korrekturen aus „Homepage Laura Texte“ sind auf der Homepage eingearbeitet. Hier stehen nur noch die Stellen, die eine Entscheidung von dir brauchen – jeweils im Zusammenhang, so wie sie auf der Seite erscheinen.</p>
+
+      <div class="op-legend">
+        <p class="op-legend-title">Wer hat was geschrieben?</p>
+        <ul>
+          <li><span class="src src-laura">Dein Text</span> So steht es heute auf der Homepage.</li>
+          <li><span class="src src-annette"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>Annette</span> Anmerkungen aus ihrem Dokument.</li>
+          <li><span class="src src-ai">✦ KI-Vorschlag</span> Formulierungen und Einschätzungen von Claude (KI). Nicht von Menschen geschrieben – bitte als Anregung verstehen, nicht als fertigen Text.</li>
+        </ul>
+      </div>
+
       <ol class="op-toc">
         <li><a href="#gruene"><b>1 · Warum jetzt Grüne?</b><small>Über mich, Kapitel 02</small></a></li>
         <li><a href="#locker"><b>2 · Etwas Lockeres</b><small>Mein Wort</small></a></li>
@@ -96,11 +138,16 @@
       <div class="section-head">
         <p class="eyebrow">Über mich</p>
         <h2><span class="op-num">1</span>Warum jetzt Grüne?</h2>
-        <p class="op-q">Kapitel 02 endet mit der Jungen Union. Viele werden sich fragen, wie der Weg zu den Grünen kam. Ein, zwei Sätze nehmen der Frage den Wind aus den Segeln.</p>
-        <p class="op-who">Anmerkung von Annette im Dokument.</p>
       </div>
 
+      <blockquote class="op-human">
+        <span class="src src-annette"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>Annette</span>
+        <p>„Warum jetzt Grüne?“</p>
+        <small>Eingefügt am Ende von Kapitel 02, direkt nach der Jungen Union.</small>
+      </blockquote>
+
       <div class="op-context">
+        <span class="src src-laura">Dein Text</span>
         <article class="chapter">
           <span class="chapter-no">02</span>
           <h3>Der erste Kontakt zur Politik</h3>
@@ -109,28 +156,31 @@
         </article>
       </div>
 
-      <div class="op-options">
-        <div class="op-opt rec">
-          <span class="op-rec">Empfehlung</span>
-          <span class="op-tag">Vorschlag A · Werte</span>
-          <h3>Gleiche Werte, neue Antworten</h3>
-          <blockquote>Meine Werte sind dieselben geblieben: Verantwortung übernehmen, verlässlich sein, solide wirtschaften. Gewachsen ist die Überzeugung, dass Bewahren heute auch heißt, Klima und Natur zu schützen. Deshalb engagiere ich mich heute bei den Grünen.</blockquote>
-          <p>Verbindet beide Stationen statt sie gegeneinanderzustellen. Passt zu „Klar. Verlässlich.“</p>
+      <div class="op-ai-block">
+        <p class="op-ai-head"><span class="src src-ai">✦ KI-Vorschläge</span> Drei mögliche Formulierungen – den eigentlichen Grund für den Wechsel kennst nur du.</p>
+        <div class="op-options">
+          <div class="op-opt ai rec">
+            <span class="op-rec">✦ KI-Empfehlung</span>
+            <span class="op-tag">Vorschlag A · Werte</span>
+            <h3>Gleiche Werte, neue Antworten</h3>
+            <blockquote>Meine Werte sind dieselben geblieben: Verantwortung übernehmen, verlässlich sein, solide wirtschaften. Gewachsen ist die Überzeugung, dass Bewahren heute auch heißt, Klima und Natur zu schützen. Deshalb engagiere ich mich heute bei den Grünen.</blockquote>
+            <p>Verbindet beide Stationen statt sie gegeneinanderzustellen. Passt zu „Klar. Verlässlich.“</p>
+          </div>
+          <div class="op-opt ai">
+            <span class="op-tag">Vorschlag B · Persönlich</span>
+            <h3>Der Moment des Wechsels</h3>
+            <blockquote>Mit eigener Familie habe ich mir die Frage neu gestellt: In was für einem Ort sollen unsere drei Töchter einmal leben? Meine Antwort darauf habe ich bei den Grünen gefunden.</blockquote>
+            <p>Nahbar und ehrlich – aber nur, wenn es zu deiner tatsächlichen Geschichte passt.</p>
+          </div>
+          <div class="op-opt ai">
+            <span class="op-tag">Vorschlag C · Sachlich</span>
+            <h3>Partei ja, aber Mering zuerst</h3>
+            <blockquote>Meinen politischen Platz habe ich später bei den Grünen gefunden. Im Rathaus zählt für mich aber vor allem eines: gute Lösungen für Mering – ganz gleich, von welcher Seite der Vorschlag kommt.</blockquote>
+            <p>Kurz, betont die Überparteilichkeit aus „Mein Wort“. Erklärt den Wechsel selbst kaum.</p>
+          </div>
         </div>
-        <div class="op-opt">
-          <span class="op-tag">Vorschlag B · Persönlich</span>
-          <h3>Der Moment des Wechsels</h3>
-          <blockquote>Mit eigener Familie habe ich mir die Frage neu gestellt: In was für einem Ort sollen unsere drei Töchter einmal leben? Meine Antwort darauf habe ich bei den Grünen gefunden.</blockquote>
-          <p>Nahbar und ehrlich – aber nur, wenn es zu deiner tatsächlichen Geschichte passt.</p>
-        </div>
-        <div class="op-opt">
-          <span class="op-tag">Vorschlag C · Sachlich</span>
-          <h3>Partei ja, aber Mering zuerst</h3>
-          <blockquote>Meinen politischen Platz habe ich später bei den Grünen gefunden. Im Rathaus zählt für mich aber vor allem eines: gute Lösungen für Mering – ganz gleich, von welcher Seite der Vorschlag kommt.</blockquote>
-          <p>Kurz, betont die Überparteilichkeit aus „Mein Wort“. Erklärt den Wechsel selbst kaum.</p>
-        </div>
+        <p class="op-note"><span class="src src-ai">✦ KI-Hinweis</span> Viele Leserinnen und Leser werden sich nach der Jungen Union fragen, wie der Weg zu den Grünen kam. Die Junge Union ganz wegzulassen wäre möglich, kommt im Wahlkampf aber ohnehin zur Sprache – offen wirkt es besser.</p>
       </div>
-      <p class="op-note">Die Sätze sind Formulierungshilfen – den eigentlichen Grund für den Wechsel kennst nur du. Alternative: die Junge Union ganz weglassen. Davon würde ich abraten, weil es im Wahlkampf ohnehin zur Sprache kommt und offen besser wirkt.</p>
     </div>
   </section>
 
@@ -140,46 +190,52 @@
       <div class="section-head">
         <p class="eyebrow">Mein Wort</p>
         <h2><span class="op-num">2</span>Ein Punkt mit Augenzwinkern</h2>
-        <p class="op-q">„Das klingt alles super – aber bisschen arg ernst und streberhaft.“ Ein lockerer Punkt würde die Liste auflockern und dich nahbarer zeigen. Da die Punkte paarweise stehen, braucht ein neuer Punkt ein Gegenstück – oder er ersetzt eine bestehende „nicht“-Hälfte.</p>
-        <p class="op-who">Anmerkung von Annette im Dokument.</p>
       </div>
 
-      <div class="op-options op-options--2">
-        <div class="op-opt rec">
-          <span class="op-rec">Empfehlung</span>
-          <span class="op-tag">Vorschlag A · Neues Paar am Ende</span>
-          <div class="op-pair">
-            <span class="y">dass Sie mich einfach ansprechen können – beim Bäcker, auf dem Markt oder am Spielfeldrand</span>
-            <span class="n">dass ich dabei schon meinen ersten Kaffee hatte</span>
+      <blockquote class="op-human">
+        <span class="src src-annette"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>Annette</span>
+        <p>„Das klingt alles super – aber bisschen arg ernst und streberhaft, oder geht’s nur mir so? Vielleicht ein lockerer Punkt noch oder so.“</p>
+      </blockquote>
+
+      <div class="op-ai-block">
+        <p class="op-ai-head"><span class="src src-ai">✦ KI-Vorschläge</span> Da die Punkte paarweise stehen, braucht ein neuer Punkt ein Gegenstück – oder er ersetzt eine bestehende „nicht“-Hälfte. Ausgegraute Hälften sind dein bestehender Text.</p>
+        <div class="op-options op-options--2">
+          <div class="op-opt ai rec">
+            <span class="op-rec">✦ KI-Empfehlung</span>
+            <span class="op-tag">Vorschlag A · Neues Paar am Ende</span>
+            <div class="op-pair">
+              <span class="y">dass Sie mich einfach ansprechen können – beim Bäcker, auf dem Markt oder am Spielfeldrand</span>
+              <span class="n">dass ich dabei schon meinen ersten Kaffee hatte</span>
+            </div>
+            <p>Schließt die Liste mit einem Lächeln ab und sagt nebenbei etwas Wichtiges: Ich bin ansprechbar.</p>
           </div>
-          <p>Schließt die Liste mit einem Lächeln ab und sagt nebenbei etwas Wichtiges: Ich bin ansprechbar.</p>
-        </div>
-        <div class="op-opt">
-          <span class="op-tag">Vorschlag B · Vereinsfeier lockerer</span>
-          <div class="op-pair">
-            <span class="y same">dass ich meinen Aufgaben gewissenhaft nachkomme und mich für Mering einsetze</span>
-            <span class="n">dass ich jede Vereinsfeier besuchen kann – so gern ich überall ein Stück Kuchen probieren würde</span>
+          <div class="op-opt ai">
+            <span class="op-tag">Vorschlag B · Vereinsfeier lockerer</span>
+            <div class="op-pair">
+              <span class="y same">dass ich meinen Aufgaben gewissenhaft nachkomme und mich für Mering einsetze</span>
+              <span class="n">dass ich jede Vereinsfeier besuchen kann – so gern ich überall ein Stück Kuchen probieren würde</span>
+            </div>
+            <p>Kleine Änderung an einer bestehenden Zeile, keine neue Zeile nötig.</p>
           </div>
-          <p>Kleine Änderung an einer bestehenden Zeile, keine neue Zeile nötig.</p>
-        </div>
-        <div class="op-opt">
-          <span class="op-tag">Vorschlag C · Familie</span>
-          <div class="op-pair">
-            <span class="y same">dass ich meinen Aufgaben gewissenhaft nachkomme und mich für Mering einsetze</span>
-            <span class="n">dass ich mit drei Töchtern im Haus immer auf die Minute pünktlich bin</span>
+          <div class="op-opt ai">
+            <span class="op-tag">Vorschlag C · Familie</span>
+            <div class="op-pair">
+              <span class="y same">dass ich meinen Aufgaben gewissenhaft nachkomme und mich für Mering einsetze</span>
+              <span class="n">dass ich mit drei Töchtern im Haus immer auf die Minute pünktlich bin</span>
+            </div>
+            <p>Sehr persönlich, ersetzt „Vereinsfeier“.</p>
           </div>
-          <p>Sehr persönlich, ersetzt „Vereinsfeier“. Jede Mutter und jeder Vater nickt hier.</p>
-        </div>
-        <div class="op-opt">
-          <span class="op-tag">Vorschlag D · Oboe</span>
-          <div class="op-pair">
-            <span class="y">dass ich Mering mit Ausdauer und Freude vertrete – innen wie außen</span>
-            <span class="n">dass ich in der Gemeinderatssitzung die Oboe auspacke</span>
+          <div class="op-opt ai">
+            <span class="op-tag">Vorschlag D · Oboe</span>
+            <div class="op-pair">
+              <span class="y">dass ich Mering mit Ausdauer und Freude vertrete – innen wie außen</span>
+              <span class="n">dass ich in der Gemeinderatssitzung die Oboe auspacke</span>
+            </div>
+            <p>Greift das Symphonieorchester aus „Meine Jugend“ auf.</p>
           </div>
-          <p>Greift das Symphonieorchester aus „Meine Jugend“ auf – ein schöner Wiedererkennungseffekt.</p>
         </div>
+        <p class="op-note"><span class="src src-ai">✦ KI-Hinweis</span> Ein, höchstens zwei lockere Punkte – sonst kippt der Ton ins Gegenteil.</p>
       </div>
-      <p class="op-note">Ausgegraute Hälften bleiben unverändert. Ein, höchstens zwei lockere Punkte – sonst kippt der Ton ins Gegenteil.</p>
     </div>
   </section>
 
@@ -189,19 +245,25 @@
       <div class="section-head">
         <p class="eyebrow">Meine Ziele · Wirtschaft</p>
         <h2><span class="op-num">3</span>Kriterien oder Maßstäbe?</h2>
-        <p class="op-q">Annette hat beide Wörter zur Wahl gestellt. Auf der Homepage steht vorerst „Kriterien“.</p>
       </div>
+
+      <blockquote class="op-human">
+        <span class="src src-annette"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>Annette</span>
+        <p>„Nach diesen Kriterien/Maßstäben entwickeln wir die Flächen.“</p>
+        <small>Statt „Danach entwickeln wir die Flächen.“ – beide Wörter stehen zur Wahl.</small>
+      </blockquote>
+
       <div class="op-words">
-        <div class="op-opt rec">
-          <span class="op-rec">Jetzt online</span>
+        <div class="op-opt">
+          <span class="op-rec op-rec--plain">Steht vorerst online</span>
           <span class="op-tag">Kriterien</span>
           <blockquote>Welche Betriebe und Branchen wollen wir gezielt ansiedeln? Nach diesen <mark>Kriterien</mark> entwickeln wir die Flächen.</blockquote>
-          <p>Nüchtern, klingt nach Plan und Prüfliste.</p>
+          <p class="op-ai-line"><span class="src src-ai">✦ KI</span> Nüchtern, klingt nach Plan und Prüfliste.</p>
         </div>
         <div class="op-opt">
           <span class="op-tag">Maßstäbe</span>
           <blockquote>Welche Betriebe und Branchen wollen wir gezielt ansiedeln? Nach diesen <mark>Maßstäben</mark> entwickeln wir die Flächen.</blockquote>
-          <p>Etwas wertender – betont, dass es um eine Haltung geht.</p>
+          <p class="op-ai-line"><span class="src src-ai">✦ KI</span> Etwas wertender – betont, dass es um eine Haltung geht.</p>
         </div>
       </div>
     </div>
@@ -213,6 +275,7 @@
       <div class="section-head">
         <p class="eyebrow">Außerhalb der Texte</p>
         <h2><span class="op-num">4</span>Noch zu klären</h2>
+        <p class="op-ai-line"><span class="src src-ai">✦ KI-Hinweise</span> Diese Punkte sind Claude beim Bauen der Seite aufgefallen.</p>
       </div>
       <ul class="op-todo">
         <li><b>Schrift für Überschriften</b><p>GrueneTypeNeue darf laut Lizenz nur nach Absprache mit dem Kreis- oder Ortsverband genutzt werden – bitte dort kurz Bescheid geben.</p></li>
