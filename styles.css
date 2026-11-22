@@ -32,8 +32,8 @@
   --facts-line: rgba(255, 255, 255, .14);
   --expect-bg: var(--primary);
   --expect-fg: var(--on-primary);
-  --slogan-bg: var(--accent);   /* Slogan-Balken wie auf dem Flyer */
-  --slogan-fg: var(--on-accent);
+  --slogan-bg: var(--accent-dark); /* Slogan-Balken wie auf dem Flyer, etwas dunkler für weiße Schrift */
+  --slogan-fg: #ffffff;
   --slogan-pad: .18em;
   --sw1: #083335; --sw2: #1cabb0;  /* Farbkreis im Umschalter */
   color-scheme: light;
@@ -124,6 +124,7 @@
   --btn-bg: #1e1e1e; --btn-hover: #3a3a3a;
   --paper: #faf8f3; --sand: #f2ede1; --sand-2: #e2d9c3; --line: #e4dccb;
   --header-bg: rgba(250, 248, 243, .92); --footer-bg: #1a1a1a; --ph-bg: rgba(201, 162, 39, .18); --shadow: rgba(0, 0, 0, .12);
+  --slogan-bg: var(--accent); --slogan-fg: var(--on-accent);
   --sw1: #2b2b2b; --sw2: #c9a227;
 }
 
@@ -221,7 +222,7 @@
   --shadow: rgba(0, 0, 0, .45);
   --facts-bg: #0e3b3e; --facts-fg: #eef4f4; --facts-key: #8fe3e6; --facts-line: rgba(255, 255, 255, .14);
   --expect-bg: #0e3b3e; --expect-fg: #eef4f4;
-  --slogan-bg: #1cabb0; --slogan-fg: #062628; --slogan-pad: .18em;
+  --slogan-bg: #148e93; --slogan-fg: #ffffff; --slogan-pad: .18em;
   color-scheme: dark;
 }
 
