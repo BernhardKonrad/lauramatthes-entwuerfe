@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Offene Punkte – lauramatthes.de</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#083335">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Diskussionsseite: immer Farbkonzept 1 „Flyer“, ohne Theme-Umschalter */
+    .op-intro { padding: clamp(48px, 7vw, 88px) 0 clamp(28px, 4vw, 44px); }
+    .op-intro h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); color: var(--heading); margin: 0 0 .3em; }
+    .op-toc { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin: 28px 0 0; padding: 0; list-style: none; counter-reset: op; }
+    .op-toc a { display: block; height: 100%; text-decoration: none; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; }
+    .op-toc a:hover { border-color: var(--accent); }
+    .op-toc b { display: block; color: var(--heading); font-family: var(--head); font-size: 1.15rem; margin-bottom: 2px; }
+    .op-toc small { color: var(--ink-soft); }
+
+    .op-num { display: inline-grid; place-items: center; width: 2em; height: 2em; border-radius: 50%; background: var(--vote); color: #fff; font-weight: 700; font-size: .85rem; margin-right: .5em; vertical-align: .1em; }
+    .op-q { font-size: 1.1rem; color: var(--ink); max-width: 46em; }
+    .op-who { font-size: .88rem; color: var(--ink-soft); }
+
+    /* Stelle im Text, an der etwas fehlt oder neu ist */
+    .op-gap { display: block; margin-top: .9rem; border: 2px dashed var(--vote); border-radius: 10px; padding: 10px 14px; color: var(--vote); font-weight: 700; font-size: .95rem; background: color-mix(in srgb, var(--vote) 6%, var(--surface)); }
+    .op-context { max-width: 640px; margin-bottom: 28px; }
+    .op-context .chapter { border-top-color: var(--vote); }
+
+    /* Vorschläge */
+    .op-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 18px; }
+    .op-options--2 { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 760px) { .op-options--2 { grid-template-columns: 1fr; } }
+    .op-opt { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 24px 20px; display: flex; flex-direction: column; gap: 10px; }
+    .op-opt.rec { border: 2px solid var(--accent); }
+    .op-tag { font-size: .74rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-text); }
+    .op-rec { position: absolute; top: -12px; right: 18px; background: var(--accent); color: var(--on-accent); font-size: .74rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
+    .op-opt h3 { margin: 0; font-size: 1.2rem; color: var(--heading); }
+    .op-opt blockquote { margin: 0; padding: 0 0 0 14px; border-left: 3px solid var(--accent); color: var(--ink); line-height: 1.55; }
+    .op-opt p { margin: 0; color: var(--ink-soft); font-size: .93rem; }
+    .op-pair { display: grid; gap: 6px; font-size: .97rem; }
+    .op-pair span { padding: 10px 12px 10px 40px; border-radius: 8px; position: relative; line-height: 1.45; }
+    .op-pair span::before { position: absolute; left: 10px; top: 10px; width: 1.35em; height: 1.35em; border-radius: 50%; display: grid; place-items: center; font-size: .78em; font-weight: 700; }
+    .op-pair .y { background: var(--expect-bg); color: var(--expect-fg); }
+    .op-pair .y::before { content: "✓"; background: var(--expect-fg); color: var(--expect-bg); }
+    .op-pair .n { background: var(--sand); color: var(--ink); }
+    .op-pair .n::before { content: "✕"; background: var(--accent); color: var(--on-accent); }
+    .op-pair .same { opacity: .6; }
+    .op-note { margin-top: 22px; font-size: .93rem; color: var(--ink-soft); max-width: 46em; }
+
+    /* Gegenüberstellung bei Wortwahl */
+    .op-words { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 18px; }
+    .op-words mark { background: color-mix(in srgb, var(--accent) 28%, transparent); color: inherit; padding: 0 .15em; border-radius: 3px; }
+
+    .op-todo { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; max-width: 760px; }
+    .op-todo li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 20px 16px 52px; position: relative; }
+    .op-todo li::before { content: ""; position: absolute; left: 20px; top: 19px; width: 18px; height: 18px; border: 2px solid var(--accent-text); border-radius: 4px; }
+    .op-todo b { color: var(--heading); }
+    .op-todo p { margin: 4px 0 0; color: var(--ink-soft); font-size: .95rem; }
+
+    .op-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; }
+    .op-head .btn { white-space: nowrap; }
+    @media (max-width: 560px) { .op-head .brand-tag { display: none; } }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap op-head">
+    <a class="brand" href="index.html">
+      <span class="brand-name">Laura Matthes</span>
+      <span class="brand-tag">Entwurf · Zur Diskussion</span>
+    </a>
+    <a class="btn btn-small" href="index.html">Zur ganzen Homepage</a>
+  </div>
+</header>
+
+<main>
+  <section class="op-intro">
+    <div class="wrap">
+      <p class="eyebrow">Stand 22. November 2026</p>
+      <h1>Offene Punkte</h1>
+      <p class="lead">Liebe Laura, Saschas Korrekturen aus „Homepage Laura Texte“ sind auf der Homepage eingearbeitet. Hier stehen nur noch die Stellen, die eine Entscheidung von dir brauchen – jeweils im Zusammenhang, so wie sie auf der Seite erscheinen, mit Vorschlägen zur Auswahl.</p>
+      <ol class="op-toc">
+        <li><a href="#gruene"><b>1 · Warum jetzt Grüne?</b><small>Über mich, Kapitel 02</small></a></li>
+        <li><a href="#locker"><b>2 · Etwas Lockeres</b><small>Mein Wort</small></a></li>
+        <li><a href="#kriterien"><b>3 · Kriterien oder Maßstäbe</b><small>Meine Ziele, Wirtschaft</small></a></li>
+        <li><a href="#sonst"><b>4 · Noch zu klären</b><small>Nicht im Text</small></a></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 1 -->
+  <section class="section section--white" id="gruene">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Über mich</p>
+        <h2><span class="op-num">1</span>Warum jetzt Grüne?</h2>
+        <p class="op-q">Kapitel 02 endet mit der Jungen Union. Viele werden sich fragen, wie der Weg zu den Grünen kam. Ein, zwei Sätze nehmen der Frage den Wind aus den Segeln.</p>
+        <p class="op-who">Anmerkung von Sascha im Dokument.</p>
+      </div>
+
+      <div class="op-context">
+        <article class="chapter">
+          <span class="chapter-no">02</span>
+          <h3>Der erste Kontakt zur Politik</h3>
+          <p>In der Schülervertretung und als Schülersprecherin habe ich meine ersten Erfahrungen gesammelt: Wie vertritt man wirkungsvoll die Interessen einer ganzen Gruppe? Wie organisiert man eine größere Veranstaltung? Politisch war ich in der Jungen Union aktiv und hatte damit direkten Kontakt zur Kommunalpolitik.</p>
+          <span class="op-gap">＋ Hier fehlt ein Satz zum Weg zu den Grünen</span>
+        </article>
+      </div>
+
+      <div class="op-options">
+        <div class="op-opt rec">
+          <span class="op-rec">Empfehlung</span>
+          <span class="op-tag">Vorschlag A · Werte</span>
+          <h3>Gleiche Werte, neue Antworten</h3>
+          <blockquote>Meine Werte sind dieselben geblieben: Verantwortung übernehmen, verlässlich sein, solide wirtschaften. Gewachsen ist die Überzeugung, dass Bewahren heute auch heißt, Klima und Natur zu schützen. Deshalb engagiere ich mich heute bei den Grünen.</blockquote>
+          <p>Verbindet beide Stationen statt sie gegeneinanderzustellen. Passt zu „Klar. Verlässlich.“</p>
+        </div>
+        <div class="op-opt">
+          <span class="op-tag">Vorschlag B · Persönlich</span>
+          <h3>Der Moment des Wechsels</h3>
+          <blockquote>Mit eigener Familie habe ich mir die Frage neu gestellt: In was für einem Ort sollen unsere drei Töchter einmal leben? Meine Antwort darauf habe ich bei den Grünen gefunden.</blockquote>
+          <p>Nahbar und ehrlich – aber nur, wenn es zu deiner tatsächlichen Geschichte passt.</p>
+        </div>
+        <div class="op-opt">
+          <span class="op-tag">Vorschlag C · Sachlich</span>
+          <h3>Partei ja, aber Mering zuerst</h3>
+          <blockquote>Meinen politischen Platz habe ich später bei den Grünen gefunden. Im Rathaus zählt für mich aber vor allem eines: gute Lösungen für Mering – ganz gleich, von welcher Seite der Vorschlag kommt.</blockquote>
+          <p>Kurz, betont die Überparteilichkeit aus „Mein Wort“. Erklärt den Wechsel selbst kaum.</p>
+        </div>
+      </div>
+      <p class="op-note">Die Sätze sind Formulierungshilfen – den eigentlichen Grund für den Wechsel kennst nur du. Alternative: die Junge Union ganz weglassen. Davon würde ich abraten, weil es im Wahlkampf ohnehin zur Sprache kommt und offen besser wirkt.</p>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section class="section section--sand" id="locker">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Mein Wort</p>
+        <h2><span class="op-num">2</span>Ein Punkt mit Augenzwinkern</h2>
+        <p class="op-q">„Das klingt alles super – aber bisschen arg ernst und streberhaft.“ Ein lockerer Punkt würde die Liste auflockern und dich nahbarer zeigen. Da die Punkte paarweise stehen, braucht ein neuer Punkt ein Gegenstück – oder er ersetzt eine bestehende „nicht“-Hälfte.</p>
+        <p class="op-who">Anmerkung von Sascha im Dokument.</p>
+      </div>
+
+      <div class="op-options op-options--2">
+        <div class="op-opt rec">
+          <span class="op-rec">Empfehlung</span>
+          <span class="op-tag">Vorschlag A · Neues Paar am Ende</span>
+          <div class="op-pair">
+            <span class="y">dass Sie mich einfach ansprechen können – beim Bäcker, auf dem Markt oder am Spielfeldrand</span>
+            <span class="n">dass ich dabei schon meinen ersten Kaffee hatte</span>
+          </div>
+          <p>Schließt die Liste mit einem Lächeln ab und sagt nebenbei etwas Wichtiges: Ich bin ansprechbar.</p>
+        </div>
+        <div class="op-opt">
+          <span class="op-tag">Vorschlag B · Vereinsfeier lockerer</span>
+          <div class="op-pair">
+            <span class="y same">dass ich meinen Aufgaben gewissenhaft nachkomme und mich für Mering einsetze</span>
+            <span class="n">dass ich jede Vereinsfeier besuchen kann – so gern ich überall ein Stück Kuchen probieren würde</span>
+          </div>
+          <p>Kleine Änderung an einer bestehenden Zeile, keine neue Zeile nötig.</p>
+        </div>
+        <div class="op-opt">
+          <span class="op-tag">Vorschlag C · Familie</span>
+          <div class="op-pair">
+            <span class="y same">dass ich meinen Aufgaben gewissenhaft nachkomme und mich für Mering einsetze</span>
+            <span class="n">dass ich mit drei Töchtern im Haus immer auf die Minute pünktlich bin</span>
+          </div>
+          <p>Sehr persönlich, ersetzt „Vereinsfeier“. Jede Mutter und jeder Vater nickt hier.</p>
+        </div>
+        <div class="op-opt">
+          <span class="op-tag">Vorschlag D · Oboe</span>
+          <div class="op-pair">
+            <span class="y">dass ich Mering mit Ausdauer und Freude vertrete – innen wie außen</span>
+            <span class="n">dass ich in der Gemeinderatssitzung die Oboe auspacke</span>
+          </div>
+          <p>Greift das Symphonieorchester aus „Meine Jugend“ auf – ein schöner Wiedererkennungseffekt.</p>
+        </div>
+      </div>
+      <p class="op-note">Ausgegraute Hälften bleiben unverändert. Ein, höchstens zwei lockere Punkte – sonst kippt der Ton ins Gegenteil.</p>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="section section--white" id="kriterien">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Meine Ziele · Wirtschaft</p>
+        <h2><span class="op-num">3</span>Kriterien oder Maßstäbe?</h2>
+        <p class="op-q">Sascha hat beide Wörter zur Wahl gestellt. Auf der Homepage steht vorerst „Kriterien“.</p>
+      </div>
+      <div class="op-words">
+        <div class="op-opt rec">
+          <span class="op-rec">Jetzt online</span>
+          <span class="op-tag">Kriterien</span>
+          <blockquote>Welche Betriebe und Branchen wollen wir gezielt ansiedeln? Nach diesen <mark>Kriterien</mark> entwickeln wir die Flächen.</blockquote>
+          <p>Nüchtern, klingt nach Plan und Prüfliste.</p>
+        </div>
+        <div class="op-opt">
+          <span class="op-tag">Maßstäbe</span>
+          <blockquote>Welche Betriebe und Branchen wollen wir gezielt ansiedeln? Nach diesen <mark>Maßstäben</mark> entwickeln wir die Flächen.</blockquote>
+          <p>Etwas wertender – betont, dass es um eine Haltung geht.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="section section--sand" id="sonst">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Außerhalb der Texte</p>
+        <h2><span class="op-num">4</span>Noch zu klären</h2>
+      </div>
+      <ul class="op-todo">
+        <li><b>Nachwahl-FAQ prüfen</b><p>Die Antworten gehen davon aus, dass die Ungültigerklärung der Wahl endgültig ist. Bitte kurz bestätigen (oder mit Jasmin klären).</p></li>
+        <li><b>Schrift für Überschriften</b><p>GrueneTypeNeue darf laut Lizenz nur nach Absprache mit dem Kreis- oder Ortsverband genutzt werden – bitte dort kurz Bescheid geben.</p></li>
+        <li><b>Fotos in voller Auflösung</b><p>Die Bilder stammen aus dem Flyer-PDF. Die Originale aus der Dropbox würden auf großen Bildschirmen schärfer aussehen.</p></li>
+        <li><b>Videos</b><p>Für die übrigen Beiträge fehlen noch Links und Vorschaubilder. Außerdem: Wo sollen die Videodateien liegen, damit sie direkt auf der Seite laufen?</p></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p class="muted">Interne Entwurfsseite – nicht für Suchmaschinen freigegeben.</p>
+    <nav class="footer-nav" aria-label="Entwürfe">
+      <a href="index.html">Homepage</a>
+      <a href="varianten/index.html">Farbkonzepte</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>

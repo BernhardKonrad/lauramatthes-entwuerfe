@@ -27,7 +27,7 @@
     });
   } else {
     bar.className = 'dx-pill';
-    bar.innerHTML = `<a href="${overview}">▦ Entwürfe &amp; Farbkonzepte</a>`;
+    bar.innerHTML = `<a href="${overview}">▦ Entwürfe &amp; Farbkonzepte</a><a href="${new URL('offene-punkte.html', document.baseURI).href}">● Offene Punkte</a>`;
   }
   document.body.appendChild(bar);
 })();
